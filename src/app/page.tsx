@@ -32,7 +32,7 @@ export default function Home() {
       </main>
       <AboutMe />
       <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">
-        Takahiro Fujii
+        © takahiro fujii
       </footer>
     </div>
   );
