@@ -21,17 +21,6 @@ export default function Home() {
       <div className="absolute inset-0 -z-10">
         <Threads amplitude={1} distance={0} enableMouseInteraction={true} />
       </div>
-      <div className="absolute top-6 right-0 z-10">
-        <GooeyNav
-          items={items}
-          animationTime={600}
-          particleCount={15}
-          particleDistances={[20, 42]}
-          particleR={75}
-          colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-          timeVariance={300}
-        />
-      </div>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <SplitText
           text="takahirofujii.dev"

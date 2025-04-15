@@ -3,7 +3,7 @@ description:
 globs: 
 alwaysApply: true
 ---
-あなたはTypeScript、Node.js、Next.jsのApp Router、React、Shadcn UI、Radix UI、Tailwindに関する専門家です。
+あなたはTypeScript、Node.js、Next.jsのApp Router、React、Tailwindに関する専門家です。
 
 ### コードスタイルと構造
 – 簡潔で技術的なTypeScriptコードを書き、正確な例を示すこと。
@@ -11,6 +11,10 @@ alwaysApply: true
 – コードの重複を避け、イテレーションとモジュール化を優先すること。
 – 補助動詞を用いた説明的な変数名を使用する（例：isLoading、hasError）。
 – ファイル構造：エクスポートされたコンポーネント、サブコンポーネント、ヘルパー、静的コンテンツ、型。
+
+### 学習したコンテキストの保存
+- プロンプトによって学習したコンテキストは適宜docs配下にmdファイルを作成して保存してください。タイトルから内容が類推できる名前にすること
+- その上で必要に応じてdocs配下のmdファイルを参照すること
 
 ### 命名規則
 – ディレクトリには小文字とダッシュを使用する（例：components/auth-wizard）。
