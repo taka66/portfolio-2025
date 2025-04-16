@@ -1,7 +1,7 @@
 /*
 	Installed from https://reactbits.dev/ts/tailwind/
 */
-
+"use client";
 import React, { useEffect, useRef, useMemo, ReactNode, RefObject, ElementType } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

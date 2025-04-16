@@ -1,7 +1,7 @@
 /*
 	Installed from https://reactbits.dev/ts/tailwind/
 */
-
+"use client";
 import React, { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
 
@@ -130,14 +130,7 @@ void main() {
 }
 `;
 
-const Threads: React.FC<ThreadsProps> = ({
-  color = [1, 1, 1],
-  amplitude = 1,
-  distance = 0,
-  enableMouseInteraction = false,
-  className,
-  ...rest
-}) => {
+const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseInteraction = false, className, ...rest }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameId = useRef<number>();
 
@@ -159,11 +152,7 @@ const Threads: React.FC<ThreadsProps> = ({
       uniforms: {
         iTime: { value: 0 },
         iResolution: {
-          value: new Color(
-            gl.canvas.width,
-            gl.canvas.height,
-            gl.canvas.width / gl.canvas.height
-          ),
+          value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height),
         },
         uColor: { value: new Color(...color) },
         uAmplitude: { value: amplitude },
@@ -220,8 +209,7 @@ const Threads: React.FC<ThreadsProps> = ({
     animationFrameId.current = requestAnimationFrame(update);
 
     return () => {
-      if (animationFrameId.current)
-        cancelAnimationFrame(animationFrameId.current);
+      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
       window.removeEventListener("resize", resize);
 
       if (enableMouseInteraction) {
@@ -233,13 +221,7 @@ const Threads: React.FC<ThreadsProps> = ({
     };
   }, [color, amplitude, distance, enableMouseInteraction]);
 
-  return (
-    <div
-      ref={containerRef}
-      className={`w-full h-full relative ${className || ""}`}
-      {...rest}
-    />
-  );
+  return <div ref={containerRef} className={`w-full h-full relative ${className || ""}`} {...rest} />;
 };
 
 export default Threads;

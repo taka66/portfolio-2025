@@ -1,13 +1,6 @@
-"use client";
-
-import SplitText from "@/blocks/TextAnimations/SplitText/SplitText";
+import { AnimatedContent } from "@/components/AnimatedContent/AnimatedContent";
 import Threads from "@/blocks/Backgrounds/Threads/Threads";
-import { easings } from "@react-spring/web";
 import { AboutMe } from "@/components/AboutMe/AboutMe";
-
-const handleAnimationComplete: () => void = () => {
-  console.log("All letters have animated!");
-};
 
 export default function Home() {
   return (
@@ -17,23 +10,11 @@ export default function Home() {
           <Threads amplitude={1} distance={0} enableMouseInteraction={true} />
         </div>
         <div className="flex flex-col gap-[32px] items-center sm:items-start">
-          <SplitText
-            text="takahirofujii.dev"
-            className="text-2xl font-semibold text-center"
-            delay={150}
-            animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
-            animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
-            easing={easings.easeOutCubic}
-            threshold={0.2}
-            rootMargin="-50px"
-            onLetterAnimationComplete={handleAnimationComplete}
-          />
+          <AnimatedContent />
         </div>
       </main>
       <AboutMe />
-      <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">
-        © takahiro fujii
-      </footer>
+      <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">© takahiro fujii</footer>
     </div>
   );
 }
