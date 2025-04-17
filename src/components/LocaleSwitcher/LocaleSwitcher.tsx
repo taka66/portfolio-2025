@@ -44,7 +44,7 @@ const LocaleSwitcher: React.FC = () => {
               ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
             `}
           >
-            {locale === "ja" ? "日本語" : "English"}
+            {locale === "ja" ? "あ" : "A"}
           </Link>
         );
       })}
