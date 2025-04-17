@@ -4,6 +4,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
 interface ThreadsProps {
   color?: [number, number, number];
@@ -133,6 +134,8 @@ void main() {
 const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseInteraction = false, className, ...rest }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameId = useRef<number>();
+  const isDarkMode = useDarkMode();
+  const programRef = useRef<Program | null>(null);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -154,13 +157,14 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
         iResolution: {
           value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height),
         },
-        uColor: { value: new Color(...color) },
+        uColor: { value: new Color(...(isDarkMode ? color : [0.1, 0.1, 0.1])) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
       },
     });
 
+    programRef.current = program;
     const mesh = new Mesh(gl, { geometry, program });
 
     function resize() {
@@ -219,7 +223,14 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [color, amplitude, distance, enableMouseInteraction]);
+  }, [color, amplitude, distance, enableMouseInteraction, isDarkMode]);
+
+  // Update color when dark mode changes
+  useEffect(() => {
+    if (programRef.current) {
+      programRef.current.uniforms.uColor.value = new Color(...(isDarkMode ? color : [0.1, 0.1, 0.1]));
+    }
+  }, [isDarkMode, color]);
 
   return <div ref={containerRef} className={`w-full h-full relative ${className || ""}`} {...rest} />;
 };
