@@ -11,13 +11,14 @@ interface Project {
 
 // Define the props for the Works page component
 interface WorksPageProps {
-  params: {
+  params: Promise<{
     lang: Locale;
-  };
+  }>;
 }
 
-export default async function Works({ params: { lang } }: WorksPageProps) {
-  const dict = await getDictionary(lang);
+export default async function Works(props: WorksPageProps) {
+  const params = await props.params;
+  const dict = await getDictionary(params.lang);
 
   // Type assertion to ensure dict.WorksPage.projects matches the Project[] type
   const projects: Project[] = dict.WorksPage.projects as Project[];

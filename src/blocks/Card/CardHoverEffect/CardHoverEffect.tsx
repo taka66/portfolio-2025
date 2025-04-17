@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-
+import Image from "next/image";
 import { useState } from "react";
 
 export const HoverEffect = ({
@@ -13,6 +13,7 @@ export const HoverEffect = ({
     title: string;
     description: string;
     link?: string;
+    image?: string;
   }[];
   className?: string;
 }) => {
@@ -49,7 +50,7 @@ export const HoverEffect = ({
                 />
               )}
             </AnimatePresence>
-            <Card>
+            <Card image={item.image}>
               <CardTitle>{item.title}</CardTitle>
               <CardDescription>{item.description}</CardDescription>
             </Card>
@@ -60,11 +61,16 @@ export const HoverEffect = ({
   );
 };
 
-export const Card = ({ className, children }: { className?: string; children: React.ReactNode }) => {
+export const Card = ({ className, children, image }: { className?: string; children: React.ReactNode; image?: string }) => {
   return (
-    <div className={cn("rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20", className)}>
+    <div className={cn("rounded-2xl h-full w-full overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20", className)}>
+      {image && (
+        <div className="absolute inset-0 w-full h-full z-10">
+          <Image src={image} alt="Project image" fill className="object-cover opacity-20" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+        </div>
+      )}
       <div className="relative z-50">
-        <div className="p-4">{children}</div>
+        <div className="p-6">{children}</div>
       </div>
     </div>
   );

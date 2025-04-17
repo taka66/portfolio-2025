@@ -9,7 +9,13 @@
       {
         "title": "Koiki.fm",
         "description": "Co-hosting a podcast for Engineering Managers (2020-2025)",
-        "link": "https://creators.spotify.com/pod/profile/koikifm/"
+        "link": "https://creators.spotify.com/pod/profile/koikifm/",
+        "image": "/works/koikifm.webp"
+      },
+      {
+        "title": "Translation Review of 'The Staff Engineer's Path'",
+        "description": "Performed a translation review of 'The Staff Engineer's Path' (2024)",
+        "link": "https://note.com/takahirofujii/n/n73fc62d43a0f"
       },
       {
         "title": "Introductory ChatGPT Seminar for 'Benefit Station' Users",
@@ -19,12 +25,14 @@
       {
         "title": "ChatGPT Introduction! - WealthPark Engineers Explain Mechanics, Usage, and Security",
         "description": "Held a seminar explaining the basics of ChatGPT and demonstrating its practical applications (Youtube/2023)",
-        "link": "https://www.youtube.com/watch?v=HHVMBkJwRH8&t=1783s&ab_channel=%E3%80%90%E5%85%AC%E5%BC%8F%E3%80%91WealthParkBusiness"
+        "link": "https://www.youtube.com/watch?v=HHVMBkJwRH8&t=1783s&ab_channel=%E3%80%90%E5%85%AC%E5%BC%8F%E3%80%91WealthParkBusiness",
+        "image": "/works/gpt-seminor.jpg"
       },
       {
         "title": "Startup Engineer Talk: Working in Multinational Teams While in Japan!!",
         "description": "Participated in a panel discussion with Unifa and Beatrust about working in multinational teams (Youtube/2023)",
-        "link": "https://www.youtube.com/watch?v=OgXqEF6VfzY&ab_channel=%E3%83%A6%E3%83%8B%E3%83%95%E3%82%A1%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%EF%BC%8FUnifaInc."
+        "link": "https://www.youtube.com/watch?v=OgXqEF6VfzY&ab_channel=%E3%83%A6%E3%83%8B%E3%83%95%E3%82%A1%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%EF%BC%8FUnifaInc.",
+        "image": "/works/startup-seminor.png"
       },
       {
         "title": "WealthPark Engineering Blog",
@@ -39,37 +47,43 @@
       {
         "title": "Remote Trust - RSGT2022 by Takahiro Fujii, Matteo Carella",
         "description": "Presented with Agile Coach Matteo Carella at Regional Scrum Gathering Tokyo 2022 on building trust in remote work environments (SpeakerDeck/2022)",
-        "link": "https://speakerdeck.com/taka66/remote-trust-rsgt2022-by-takahiro-fujii-matteo-carella"
+        "link": "https://speakerdeck.com/taka66/remote-trust-rsgt2022-by-takahiro-fujii-matteo-carella",
+        "image": "/works/rsgt2022.jpg"
       },
       {
         "title": "Now that the organization has transformed, the next dramatic growth comes from the product. Challenges of a VP of Engineering leading a global engineering organization",
         "description": "Internal interview article at WealthPark (Wantedly/2021)",
-        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/364562"
+        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/364562",
+        "image": "/works/wp-interview.webp"
       },
       {
         "title": "Collaboration between PO/PdM and Engineers in Squads",
         "description": "Spoke at Product Owner Festival 2021 Spring about cross-functional organizations based on the Spotify Model (SpeakerDeck/2021)",
-        "link": "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup"
+        "link": "https://speakerdeck.com/taka66/pdmtoenziniafalsexie-ye-purodakutoonaji-ri2021-spring-poji-ri2021spring"
       },
       {
         "title": "WealthPark's Product VPs talk about products, technologies, and organization",
         "description": "Internal interview article about product development at WealthPark (Wantedly/2020)",
-        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/283428#_=_"
+        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/283428#_=_",
+        "image": "/works/wp-interview-3.webp"
       },
       {
         "title": "Large react product with 20+ FrontEnd Engineers in Rakuten Travel(React Tokyo Plus)",
         "description": "Presented at React Tokyo Plus, a React-related meetup (SpeakerDeck/2019)",
-        "link": "https://speakerdeck.com/taka66/large-react-product-with-20-plus-frontend-engineers-in-rakuten-travel"
+        "link": "https://speakerdeck.com/taka66/large-react-product-with-20-plus-frontend-engineers-in-rakuten-travel",
+        "image": "/works/react-tokyo-plus.png"
       },
       {
         "title": "About Rakuten Travel's Frontend (React Meetup)",
         "description": "Presented at a React-related meetup (SpeakerDeck/2019)",
-        "link": "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup"
+        "link": "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup",
+        "image": "/works/travel-frontend-react.webp"
       },
       {
         "title": "Microservice Meetup Vol.6",
         "description": "Presented on microservices at the Microservice meetup (SpeakerDeck/2018)",
-        "link": "https://speakerdeck.com/taka66/microservices-at-microservice-meetup-vol-dot-6"
+        "link": "https://speakerdeck.com/taka66/microservices-at-microservice-meetup-vol-dot-6",
+        "image": "/works/microservice-meetup.jpg"
       },
       {
         "title": "Tokyo University of Science - Lecture",
@@ -77,12 +91,14 @@
       },
       {
         "title": "Tokyo University of Science - Contribution (Science Forum)",
-        "description": "Contributed an article titled 'Turning What You Love into a Job' to the university journal (2017)"
+        "description": "Contributed an article titled 'Turning What You Love into a Job' to the university journal (2017)",
+        "image": "/works/tokyo-university-of-science-article.webp"
       },
       {
         "title": "Rakuten Travel and Spring (Spring Day 2016)",
         "description": "Presented on the use of Spring at Rakuten Travel at Spring Day 2016 (SlideShare/2016)",
-        "link": "https://www.slideshare.net/slideshow/springspring-day-2016/69327034"
+        "link": "https://www.slideshare.net/slideshow/springspring-day-2016/69327034",
+        "image": "/works/travel-spring.webp"
       },
       {
         "title": "Using Spring Rest Docs",

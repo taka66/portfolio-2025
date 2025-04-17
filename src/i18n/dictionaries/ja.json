@@ -9,7 +9,13 @@
       {
         "title": "小粋fm(Koiki.fm)",
         "description": "Engineering Manager向けのPodcastを2名で運営しています(2020-2025)",
-        "link": "https://creators.spotify.com/pod/profile/koikifm/"
+        "link": "https://creators.spotify.com/pod/profile/koikifm/",
+        "image": "/works/koikifm.webp"
+      },
+      {
+        "title": "「スタッフエンジニアの道」の翻訳レビューを行いました",
+        "description": "「スタッフエンジニアの道」の翻訳レビューを行いました(2024)",
+        "link": "https://note.com/takahirofujii/n/n73fc62d43a0f"
       },
       {
         "title": "『ベネフィット・ステーション』利用者向けChatGPT入門セミナー",
@@ -19,12 +25,14 @@
       {
         "title": "Chat GPT入門！〜 仕組み・使い方・セキュリティをWealthParkのエンジニアが解説〜",
         "description": "Chat GPTの仕組みを基本から解説し、実際にChat GPTの活用方法を紹介するセミナーを行いました(Youtube/2023)",
-        "link": "https://www.youtube.com/watch?v=HHVMBkJwRH8&t=1783s&ab_channel=%E3%80%90%E5%85%AC%E5%BC%8F%E3%80%91WealthParkBusiness"
+        "link": "https://www.youtube.com/watch?v=HHVMBkJwRH8&t=1783s&ab_channel=%E3%80%90%E5%85%AC%E5%BC%8F%E3%80%91WealthParkBusiness",
+        "image": "/works/gpt-seminor.jpg"
       },
       {
         "title": "日本にいながら多国籍チームで働けるスタートアップエンジニアトーク！！",
         "description": "多国籍チームで働く組織について、ユニファさんとBeatrustさんと一緒にパネルディスカッションを行いました。(Youtube/2023)",
-        "link": "https://www.youtube.com/watch?v=OgXqEF6VfzY&ab_channel=%E3%83%A6%E3%83%8B%E3%83%95%E3%82%A1%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%EF%BC%8FUnifaInc."
+        "link": "https://www.youtube.com/watch?v=OgXqEF6VfzY&ab_channel=%E3%83%A6%E3%83%8B%E3%83%95%E3%82%A1%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%EF%BC%8FUnifaInc.",
+        "image": "/works/startup-seminor.png"
       },
       {
         "title": "WealthPark Engineering Blog",
@@ -39,37 +47,43 @@
       {
         "title": "Remote Trust - RSGT2022 by Takahiro Fujii, Matteo Carella",
         "description": "Regional Scrum Gathering Tokyo 2022において、リモートワーク下における信頼関係の構築について発表をAgile CoachのMatteo Carella氏と共に行いました。(SpeakerDeck/2022)",
-        "link": "https://speakerdeck.com/taka66/remote-trust-rsgt2022-by-takahiro-fujii-matteo-carella"
+        "link": "https://speakerdeck.com/taka66/remote-trust-rsgt2022-by-takahiro-fujii-matteo-carella",
+        "image": "/works/rsgt2022.jpg"
       },
       {
         "title": "組織が変革されてきた今、次に劇的に成長させるのはプロダクト。グローバルなエンジニア組織を率いるVP of Engineeringの挑戦",
         "description": "WealthParkの社内インタビュー記事です(Wantedly/2021)",
-        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/364562"
+        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/364562",
+        "image": "/works/wp-interview.webp"
       },
       {
         "title": "SquadにおけるPO/PdMとエンジニアの協業",
         "description": "プロダクトオーナー祭り2021 Springにて、Spotify Modelをベースにしたクロスファンクショナル組織のあり方について話ました。(SpeakerDeck/2021)",
-        "link": "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup"
+        "link": "https://speakerdeck.com/taka66/pdmtoenziniafalsexie-ye-purodakutoonaji-ri2021-spring-poji-ri2021spring"
       },
       {
         "title": "WealthPark's Product VPs talk about products, technologies, and organization",
         "description": "WealthParkのプロダクト開発についての社内インタビュー記事です。(Wantedly/2020)",
-        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/283428#_=_"
+        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/283428#_=_",
+        "image": "/works/wp-interview-3.webp"
       },
       {
         "title": "Large react product with 20+ FrontEnd Engineers in Rakuten Travel(React Tokyo Plus)",
         "description": "React Tokyo PlusというReact関連のmeetupで発表を行いました。(SpeakerDeck/2019)",
-        "link": "https://speakerdeck.com/taka66/large-react-product-with-20-plus-frontend-engineers-in-rakuten-travel"
+        "link": "https://speakerdeck.com/taka66/large-react-product-with-20-plus-frontend-engineers-in-rakuten-travel",
+        "image": "/works/react-tokyo-plus.png"
       },
       {
         "title": "楽天トラベルのフロントエンドについて(React Meetup)",
         "description": "react関連のmeetupにて発表を行いました。(SpeakerDeck/2019)",
-        "link": "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup"
+        "link": "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup",
+        "image": "/works/travel-frontend-react.webp"
       },
       {
         "title": "Microservice Meetup Vol.6",
         "description": "Microservice meetupでマイクロサービスに関する発表を行いました。(SpeakerDeck/2018)",
-        "link": "https://speakerdeck.com/taka66/microservices-at-microservice-meetup-vol-dot-6"
+        "link": "https://speakerdeck.com/taka66/microservices-at-microservice-meetup-vol-dot-6",
+        "image": "/works/microservice-meetup.jpg"
       },
       {
         "title": "東京理科大学 - 講演",
@@ -77,12 +91,14 @@
       },
       {
         "title": "東京理科大学 - 寄稿(科学フォーラム)",
-        "description": "'好きなことを仕事にする'という題で、学内誌に寄稿しました。(2017)"
+        "description": "'好きなことを仕事にする'という題で、学内誌に寄稿しました。(2017)",
+        "image": "/works/tokyo-university-of-science-article.webp"
       },
       {
         "title": "楽天トラベルとSpring(Spring Day 2016)",
         "description": "Spring Day 2016にて、楽天トラベルにおけるSpringの活用について発表を行いました。(SlideShare/2016)",
-        "link": "https://www.slideshare.net/slideshow/springspring-day-2016/69327034"
+        "link": "https://www.slideshare.net/slideshow/springspring-day-2016/69327034",
+        "image": "/works/travel-spring.webp"
       },
       {
         "title": "Spring Rest Docsの活用について",
