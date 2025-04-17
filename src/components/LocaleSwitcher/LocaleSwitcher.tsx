@@ -9,15 +9,32 @@ const LocaleSwitcher: React.FC = () => {
 
   const redirectedPathname = (locale: Locale) => {
     if (!pathname) return "/";
+
+    // Remove the current locale from pathname if it exists
     const segments = pathname.split("/");
-    segments[1] = locale;
+    const currentLocale = i18n.locales.find((loc) => segments[1] === loc);
+    if (currentLocale) {
+      segments.splice(1, 1);
+    }
+
+    // For default locale (ja), don't add locale to the path
+    if (locale === i18n.defaultLocale) {
+      return segments.join("/") || "/";
+    }
+
+    // For other locales, add the locale to the path
+    segments.splice(1, 0, locale);
     return segments.join("/");
   };
+
+  // Get current locale from pathname or use default
+  const segments = pathname?.split("/") || [];
+  const currentLocale = i18n.locales.find((loc) => segments[1] === loc) || i18n.defaultLocale;
 
   return (
     <div className="flex space-x-4">
       {i18n.locales.map((locale) => {
-        const isActive = pathname?.split("/")[1] === locale;
+        const isActive = currentLocale === locale;
         return (
           <Link
             key={locale}
@@ -27,7 +44,7 @@ const LocaleSwitcher: React.FC = () => {
               ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
             `}
           >
-            {locale === "ja" ? "JA" : "EN"}
+            {locale === "ja" ? "日本語" : "English"}
           </Link>
         );
       })}

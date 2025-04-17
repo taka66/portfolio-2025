@@ -23,15 +23,19 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // 1. リクエストのパスにロケールが含まれていないかをチェック
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every((locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`);
 
-  // 2. ロケールが含まれていない場合、最適なロケールにリダイレクト
-  // Redirect to best locale when locale is missing
+  // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
 
+    // If locale is the default locale, don't redirect
+    if (locale === i18n.defaultLocale) {
+      return NextResponse.rewrite(new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, request.url));
+    }
+
+    // For non-default locales, redirect with the locale prefix
     return NextResponse.redirect(new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, request.url));
   }
 }
