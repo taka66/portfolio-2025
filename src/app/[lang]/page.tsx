@@ -14,7 +14,7 @@ export default async function Home(props: { params: Promise<{ lang: Locale }> })
     <div className="font-[family-name:var(--font-geist-sans)]">
       <main className="relative flex flex-col items-center" style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
         <div className="absolute inset-0 -z-10">
-          <Threads amplitude={1} distance={0} enableMouseInteraction={true} />
+          <Threads amplitude={1} distance={0.1} enableMouseInteraction={true} />
         </div>
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="flex flex-col gap-[32px] items-center sm:items-start">
