@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
+import LocaleSwitcher from "@/components/LocaleSwitcher/LocaleSwitcher";
 
 interface NavItem {
   label: string;
@@ -20,7 +21,8 @@ const Header: React.FC = () => {
 
   return (
     <header className="w-full p-4">
-      <div className="container mx-auto flex justify-end">
+      <div className="container mx-auto flex justify-between items-center">
+        <LocaleSwitcher />
         <nav>
           <ul className="flex space-x-6">
             {navItems.map((item) => {
