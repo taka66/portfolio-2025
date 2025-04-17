@@ -12,11 +12,11 @@ export default async function Home(props: { params: Promise<{ lang: Locale }> })
 
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-      <main className="relative flex flex-col items-center min-h-screen p-8 sm:p-20">
+      <main className="relative flex flex-col items-center h-screen p-8 sm:p-20">
         <div className="absolute inset-0 -z-10">
           <Threads amplitude={1} distance={0} enableMouseInteraction={true} />
         </div>
-        <div className="flex-1 flex flex-col items-center justify-center w-full">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div className="flex flex-col gap-[32px] items-center sm:items-start">
             <AnimatedContent />
           </div>
