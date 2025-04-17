@@ -24,7 +24,7 @@ export default async function Works(props: WorksPageProps) {
   const projects: Project[] = dict.WorksPage.projects as Project[];
 
   return (
-    <div className="max-w-5xl mx-auto px-8">
+    <div className="max-w-5xl mx-auto px-8 pt-24">
       <HoverEffect items={projects} />
     </div>
   );
