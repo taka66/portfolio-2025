@@ -17,6 +17,7 @@ interface DecryptedTextProps {
   encryptedClassName?: string;
   parentClassName?: string;
   animateOn?: "view" | "hover";
+  // eslint-disable-next-line
   [key: string]: any;
 }
 

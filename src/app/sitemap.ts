@@ -4,7 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://takahirofujii.dev";
 
   // 基本ページのルート
-  const routes = ["", "/about", "/works", "/contact"].map((route) => ({
+  const routes = ["", "/works"].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
