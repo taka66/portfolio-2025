@@ -1,8 +1,13 @@
 import { AnimatedContent } from "@/components/AnimatedContent/AnimatedContent";
 import Threads from "@/blocks/Backgrounds/Threads/Threads";
 import { AboutMe } from "@/components/AboutMe/AboutMe";
+import { Locale } from "@/i18n/i18n-config";
+import { getDictionary } from "@/i18n/dictionaries";
+export default async function Home(props: { params: Promise<{ lang: Locale }> }) {
+  const { lang } = await props.params;
+  const dictData = await getDictionary(lang);
+  const aboutme = dictData.AboutMe;
 
-export default function Home() {
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
       <main className="relative flex flex-col items-center justify-center min-h-screen p-8 sm:p-20">
@@ -13,7 +18,7 @@ export default function Home() {
           <AnimatedContent />
         </div>
       </main>
-      <AboutMe />
+      <AboutMe dictionary={aboutme} />
       <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">© takahiro fujii</footer>
     </div>
   );
