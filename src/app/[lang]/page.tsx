@@ -12,7 +12,7 @@ export default async function Home(props: { params: Promise<{ lang: Locale }> })
 
   return (
     <div className="font-[family-name:var(--font-geist-sans)]">
-      <main className="relative flex flex-col items-center h-screen p-8 sm:p-20">
+      <main className="relative flex flex-col items-center" style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
         <div className="absolute inset-0 -z-10">
           <Threads amplitude={1} distance={0} enableMouseInteraction={true} />
         </div>

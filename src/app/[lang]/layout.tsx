@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header/Header";
 import JsonLd from "@/components/JsonLd";
+import { ViewportHeightProvider } from "@/components/ViewportHeightProvider/ViewportHeightProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,9 +78,11 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <JsonLd />
-        <Header />
-        {children}
+        <ViewportHeightProvider>
+          <JsonLd />
+          <Header />
+          {children}
+        </ViewportHeightProvider>
       </body>
     </html>
   );
