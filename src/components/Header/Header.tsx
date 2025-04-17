@@ -17,6 +17,14 @@ const navItems: NavItem[] = [
   { label: "Blog", href: "https://note.com/takahirofujii/" }, // 外部リンクの例
 ];
 
+const ExternalLinkIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline-block ml-1">
+    <path d="M18 11.66V21C18 21.55 17.55 22 17 22H3C2.45 22 2 21.55 2 21V7C2 6.45 2.45 6 3 6H12.34" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M22 2L10 14" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M22 8V2H16" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const Header: React.FC = () => {
   const pathname = usePathname(); // 現在のパスを取得
 
@@ -50,7 +58,7 @@ const Header: React.FC = () => {
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                     className={`
-                      transition-colors
+                      transition-colors inline-flex items-center
                       ${
                         isActive
                           ? "text-blue-600 dark:text-blue-400" // アクティブ時のスタイル
@@ -59,6 +67,7 @@ const Header: React.FC = () => {
                     `}
                   >
                     {item.label}
+                    {isExternal && <ExternalLinkIcon />}
                   </Link>
                 </li>
               );
