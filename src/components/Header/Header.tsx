@@ -26,13 +26,10 @@ const ExternalLinkIcon = () => (
 );
 
 const Header: React.FC = () => {
-  const pathname = usePathname(); // 現在のパスを取得
-
-  // Get current locale from pathname or use default
+  const pathname = usePathname();
   const segments = pathname?.split("/") || [];
   const currentLocale = i18n.locales.find((loc) => segments[1] === loc) || i18n.defaultLocale;
 
-  // Function to add locale to internal links
   const getLocalizedHref = (href: string) => {
     if (href.startsWith("http")) return href;
     if (currentLocale === i18n.defaultLocale) return href;
@@ -40,15 +37,14 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="w-full p-4">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="fixed top-0 left-0 w-full h-16 bg-background/80 backdrop-blur-sm z-50">
+      <div className="container mx-auto h-full flex justify-between items-center px-4">
         <LocaleSwitcher />
         <nav>
           <ul className="flex space-x-6">
             {navItems.map((item) => {
               const isExternal = item.href.startsWith("http");
               const localizedHref = isExternal ? item.href : getLocalizedHref(item.href);
-              // 外部リンクでない、かつ現在のパスとhrefが一致する場合にアクティブ
               const isActive = !isExternal && pathname === localizedHref;
 
               return (
@@ -59,11 +55,7 @@ const Header: React.FC = () => {
                     rel={isExternal ? "noopener noreferrer" : undefined}
                     className={`
                       transition-colors inline-flex items-center
-                      ${
-                        isActive
-                          ? "text-blue-600 dark:text-blue-400" // アクティブ時のスタイル
-                          : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white" // 非アクティブ時のスタイル
-                      }
+                      ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
                     `}
                   >
                     {item.label}
