@@ -27,7 +27,6 @@ export default async function Home(props: { params: Promise<{ lang: Locale }> })
         </div>
       </main>
       <AboutMe dictionary={aboutme} />
-      <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">© takahiro fujii</footer>
     </MotionWrapper>
   );
 }
