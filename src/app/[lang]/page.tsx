@@ -3,6 +3,8 @@ import Threads from "@/blocks/Backgrounds/Threads/Threads";
 import { AboutMe } from "@/components/AboutMe/AboutMe";
 import { Locale } from "@/i18n/i18n-config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { ScrollIndicator } from "@/components/ScrollIndicator/ScrollIndicator";
+
 export default async function Home(props: { params: Promise<{ lang: Locale }> }) {
   const { lang } = await props.params;
   const dictData = await getDictionary(lang);
@@ -16,6 +18,7 @@ export default async function Home(props: { params: Promise<{ lang: Locale }> })
         </div>
         <div className="flex flex-col gap-[32px] items-center sm:items-start">
           <AnimatedContent />
+          <ScrollIndicator text="About me" />
         </div>
       </main>
       <AboutMe dictionary={aboutme} />
