@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/Header/Header";
 import JsonLd from "@/components/JsonLd";
 import { ViewportHeightProvider } from "@/components/ViewportHeightProvider/ViewportHeightProvider";
+import { AnimatePresence } from "framer-motion";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -81,7 +82,7 @@ export default function RootLayout({
         <ViewportHeightProvider>
           <JsonLd />
           <Header />
-          {children}
+          <AnimatePresence mode="wait">{children}</AnimatePresence>
         </ViewportHeightProvider>
       </body>
     </html>
