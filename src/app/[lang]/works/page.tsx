@@ -1,92 +1,27 @@
 import { HoverEffect } from "@/blocks/Card/CardHoverEffect/card-hover-effect";
+import { getDictionary } from "@/i18n/dictionaries";
+import { Locale } from "@/i18n/i18n-config";
 
-// Define the type for the project items inline
-export const projects: {
+// Define the type for the project items inline, matching the dictionary structure
+interface Project {
   title: string;
   description: string;
-  link?: string; // Link is optional
-}[] = [
-  {
-    title: "小粋fm(Koiki.fm)",
-    description: "Engineering Manager向けのPodcastを2名で運営しています(2020-2025)",
-    link: "https://creators.spotify.com/pod/profile/koikifm/",
-  },
-  {
-    title: "『ベネフィット・ステーション』利用者向けChatGPT入門セミナー",
-    description: "ベネフィット・ステーションの利用者向けにChatGPTの入門セミナーを行いました(2023)",
-    link: "https://prtimes.jp/main/html/rd/p/000000108.000040576.html",
-  },
-  {
-    title: "Chat GPT入門！〜 仕組み・使い方・セキュリティをWealthParkのエンジニアが解説〜",
-    description: "Chat GPTの仕組みを基本から解説し、実際にChat GPTの活用方法を紹介するセミナーを行いました(Youtube/2023)",
-    link: "https://www.youtube.com/watch?v=HHVMBkJwRH8&t=1783s&ab_channel=%E3%80%90%E5%85%AC%E5%BC%8F%E3%80%91WealthParkBusiness",
-  },
-  {
-    title: "日本にいながら多国籍チームで働けるスタートアップエンジニアトーク！！",
-    description: "多国籍チームで働く組織について、ユニファさんとBeatrustさんと一緒にパネルディスカッションを行いました。(Youtube/2023)",
-    link: "https://www.youtube.com/watch?v=OgXqEF6VfzY&ab_channel=%E3%83%A6%E3%83%8B%E3%83%95%E3%82%A1%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%EF%BC%8FUnifaInc.",
-  },
-  {
-    title: "What do we want to know through coding assessment",
-    description: "WealthParkにおけるCoding Assessmentについての発表を行いました。(SpeakerDeck/2022)",
-    link: "https://speakerdeck.com/taka66/what-do-we-want-to-know-through-coding-assessment",
-  },
-  {
-    title: "Remote Trust - RSGT2022 by Takahiro Fujii, Matteo Carella",
-    description: "Regional Scrum Gathering Tokyo 2022において、リモートワーク下における信頼関係の構築について発表をAgile CoachのMatteo Carella氏と共に行いました。(SpeakerDeck/2022)",
-    link: "https://speakerdeck.com/taka66/remote-trust-rsgt2022-by-takahiro-fujii-matteo-carella",
-  },
-  {
-    title: "組織が変革されてきた今、次に劇的に成長させるのはプロダクト。グローバルなエンジニア組織を率いるVP of Engineeringの挑戦",
-    description: "WealthParkの社内インタビュー記事です(Wantedly/2021)",
-    link: "https://www.wantedly.com/companies/wealth-park/post_articles/364562",
-  },
-  {
-    title: "SquadにおけるPO/PdMとエンジニアの協業",
-    description: "プロダクトオーナー祭り2021 Springにて、Spotify Modelをベースにしたクロスファンクショナル組織のあり方について話ました。(SpeakerDeck/2021)",
-    link: "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup",
-  },
-  {
-    title: "WealthPark's Product VPs talk about products, technologies, and organization",
-    description: "WealthParkのプロダクト開発についての社内インタビュー記事です。(Wantedly/2020)",
-    link: "https://www.wantedly.com/companies/wealth-park/post_articles/283428#_=_",
-  },
-  {
-    title: "Large react product with 20+ FrontEnd Engineers in Rakuten Travel(React Tokyo Plus)",
-    description: "React Tokyo PlusというReact関連のmeetupで発表を行いました。(SpeakerDeck/2019)",
-    link: "https://speakerdeck.com/taka66/large-react-product-with-20-plus-frontend-engineers-in-rakuten-travel",
-  },
-  {
-    title: "楽天トラベルのフロントエンドについて(React Meetup)",
-    description: "react関連のmeetupにて発表を行いました。(SpeakerDeck/2019)",
-    link: "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup",
-  },
-  {
-    title: "Microservice Meetup Vol.6",
-    description: "Microservice meetupでマイクロサービスに関する発表を行いました。(SpeakerDeck/2018)",
-    link: "https://speakerdeck.com/taka66/microservices-at-microservice-meetup-vol-dot-6",
-  },
-  {
-    title: "東京理科大学 - 講演",
-    description: "グローバルな環境におけるエンジニアのキャリア形成というタイトルで講演を行いました。(2017)",
-  },
-  {
-    title: "東京理科大学 - 寄稿(科学フォーラム)",
-    description: "'好きなことを仕事にする'という題で、学内誌に寄稿しました。(2017)",
-  },
-  {
-    title: "楽天トラベルとSpring(Spring Day 2016)",
-    description: "Spring Day 2016にて、楽天トラベルにおけるSpringの活用について発表を行いました。(SlideShare/2016)",
-    link: "https://www.slideshare.net/slideshow/springspring-day-2016/69327034",
-  },
-  {
-    title: "Spring Rest Docsの活用について",
-    description: "JSUG(Japan Spring User Group)にてAPI Testing documentationについて発表を行いました。(SlideShare/2015)",
-    link: "https://www.slideshare.net/slideshow/spring-onewebdocument/55886107",
-  },
-];
+  link?: string;
+}
 
-export default function Works() {
+// Define the props for the Works page component
+interface WorksPageProps {
+  params: {
+    lang: Locale;
+  };
+}
+
+export default async function Works({ params: { lang } }: WorksPageProps) {
+  const dict = await getDictionary(lang);
+
+  // Type assertion to ensure dict.WorksPage.projects matches the Project[] type
+  const projects: Project[] = dict.WorksPage.projects as Project[];
+
   return (
     <div className="max-w-5xl mx-auto px-8">
       <HoverEffect items={projects} />

@@ -3,5 +3,87 @@
     "name": "Takahiro Fujii",
     "title": "Product Engineer / Software Engineer / Designer",
     "description": "Leading product development as CTO at WealthPark Inc.\nAlso involved in product development and UI/UX design as an engineer utilizing LLMs.\n\nAfter graduating from university, joined Rakuten, Inc. and worked on the development of Rakuten Travel.\nIn the international business team, involved in the launch and development of multiple new services, including booking systems for overseas hotels, management screens, accounting systems, inbound sites, and external system integration.\nStarted career as a full-stack engineer. Since 2017, specialized in the UI/UX domain as an engineer and engineering manager, leading the management of web frontend and Android/iOS app development teams, and driving the growth of services and organizations.\n\nJoined WealthPark in 2020.\nAs VPoE, focused on building and strengthening a multinational engineering organization while leading the development of multiple services, including real estate management systems.\nAppointed to the current position of CTO in 2024."
+  },
+  "WorksPage": {
+    "projects": [
+      {
+        "title": "Koiki.fm",
+        "description": "Co-hosting a podcast for Engineering Managers (2020-2025)",
+        "link": "https://creators.spotify.com/pod/profile/koikifm/"
+      },
+      {
+        "title": "Introductory ChatGPT Seminar for 'Benefit Station' Users",
+        "description": "Conducted an introductory seminar on ChatGPT for Benefit Station users (2023)",
+        "link": "https://prtimes.jp/main/html/rd/p/000000108.000040576.html"
+      },
+      {
+        "title": "ChatGPT Introduction! - WealthPark Engineers Explain Mechanics, Usage, and Security",
+        "description": "Held a seminar explaining the basics of ChatGPT and demonstrating its practical applications (Youtube/2023)",
+        "link": "https://www.youtube.com/watch?v=HHVMBkJwRH8&t=1783s&ab_channel=%E3%80%90%E5%85%AC%E5%BC%8F%E3%80%91WealthParkBusiness"
+      },
+      {
+        "title": "Startup Engineer Talk: Working in Multinational Teams While in Japan!!",
+        "description": "Participated in a panel discussion with Unifa and Beatrust about working in multinational teams (Youtube/2023)",
+        "link": "https://www.youtube.com/watch?v=OgXqEF6VfzY&ab_channel=%E3%83%A6%E3%83%8B%E3%83%95%E3%82%A1%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%EF%BC%8FUnifaInc."
+      },
+      {
+        "title": "What do we want to know through coding assessment",
+        "description": "Presented on Coding Assessment at WealthPark (SpeakerDeck/2022)",
+        "link": "https://speakerdeck.com/taka66/what-do-we-want-to-know-through-coding-assessment"
+      },
+      {
+        "title": "Remote Trust - RSGT2022 by Takahiro Fujii, Matteo Carella",
+        "description": "Presented with Agile Coach Matteo Carella at Regional Scrum Gathering Tokyo 2022 on building trust in remote work environments (SpeakerDeck/2022)",
+        "link": "https://speakerdeck.com/taka66/remote-trust-rsgt2022-by-takahiro-fujii-matteo-carella"
+      },
+      {
+        "title": "Now that the organization has transformed, the next dramatic growth comes from the product. Challenges of a VP of Engineering leading a global engineering organization",
+        "description": "Internal interview article at WealthPark (Wantedly/2021)",
+        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/364562"
+      },
+      {
+        "title": "Collaboration between PO/PdM and Engineers in Squads",
+        "description": "Spoke at Product Owner Festival 2021 Spring about cross-functional organizations based on the Spotify Model (SpeakerDeck/2021)",
+        "link": "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup"
+      },
+      {
+        "title": "WealthPark's Product VPs talk about products, technologies, and organization",
+        "description": "Internal interview article about product development at WealthPark (Wantedly/2020)",
+        "link": "https://www.wantedly.com/companies/wealth-park/post_articles/283428#_=_"
+      },
+      {
+        "title": "Large react product with 20+ FrontEnd Engineers in Rakuten Travel(React Tokyo Plus)",
+        "description": "Presented at React Tokyo Plus, a React-related meetup (SpeakerDeck/2019)",
+        "link": "https://speakerdeck.com/taka66/large-react-product-with-20-plus-frontend-engineers-in-rakuten-travel"
+      },
+      {
+        "title": "About Rakuten Travel's Frontend (React Meetup)",
+        "description": "Presented at a React-related meetup (SpeakerDeck/2019)",
+        "link": "https://speakerdeck.com/taka66/le-tian-toraberufalsehurontoendonituite-react-meetup"
+      },
+      {
+        "title": "Microservice Meetup Vol.6",
+        "description": "Presented on microservices at the Microservice meetup (SpeakerDeck/2018)",
+        "link": "https://speakerdeck.com/taka66/microservices-at-microservice-meetup-vol-dot-6"
+      },
+      {
+        "title": "Tokyo University of Science - Lecture",
+        "description": "Gave a lecture titled 'Career Development for Engineers in a Global Environment' (2017)"
+      },
+      {
+        "title": "Tokyo University of Science - Contribution (Science Forum)",
+        "description": "Contributed an article titled 'Turning What You Love into a Job' to the university journal (2017)"
+      },
+      {
+        "title": "Rakuten Travel and Spring (Spring Day 2016)",
+        "description": "Presented on the use of Spring at Rakuten Travel at Spring Day 2016 (SlideShare/2016)",
+        "link": "https://www.slideshare.net/slideshow/springspring-day-2016/69327034"
+      },
+      {
+        "title": "Using Spring Rest Docs",
+        "description": "Presented on API Testing documentation at JSUG (Japan Spring User Group) (SlideShare/2015)",
+        "link": "https://www.slideshare.net/slideshow/spring-onewebdocument/55886107"
+      }
+    ]
   }
 }
