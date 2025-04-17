@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://takahirofujii.dev"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
     default: "Takahiro Fujii",
     template: "%s | Takahiro Fujii",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Takahiro Fujii",
     description: "Product Engineer / Software Engineer / Designer / CTO / Takahiro Fujii / 藤井 貴浩",
-    url: "https://takahirofujii.dev",
+    url: process.env.NEXT_PUBLIC_SITE_URL,
     siteName: "Takahiro Fujii",
     locale: "ja_JP",
     type: "website",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-site-verification",
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 };
 
