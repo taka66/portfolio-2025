@@ -104,6 +104,12 @@
         "title": "Spring Rest Docsの活用について",
         "description": "JSUG(Japan Spring User Group)にてAPI Testing documentationについて発表を行いました。(SlideShare/2015)",
         "link": "https://www.slideshare.net/slideshow/spring-onewebdocument/55886107"
+      },
+      {
+        "title": "小粋(KOIKI)",
+        "description": "Founded engineering team for hackathon(2013-2016)",
+        "link": "https://koikijs.github.io/",
+        "image": "/works/koiki.png"
       }
     ]
   }

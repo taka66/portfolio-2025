@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header/Header";
+import JsonLd from "@/components/JsonLd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +15,58 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Takahiro Fujii",
+  metadataBase: new URL("https://takahirofujii.dev"),
+  title: {
+    default: "Takahiro Fujii",
+    template: "%s | Takahiro Fujii",
+  },
   description: "Product Engineer / Software Engineer / Designer / CTO / Takahiro Fujii / 藤井 貴浩",
+  keywords: ["Product Engineer", "Software Engineer", "Designer", "CTO", "Takahiro Fujii", "藤井 貴浩", "Next.js", "React", "TypeScript"],
+  authors: [{ name: "Takahiro Fujii" }],
+  creator: "Takahiro Fujii",
+  publisher: "Takahiro Fujii",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "Takahiro Fujii",
+    description: "Product Engineer / Software Engineer / Designer / CTO / Takahiro Fujii / 藤井 貴浩",
+    url: "https://takahirofujii.dev",
+    siteName: "Takahiro Fujii",
+    locale: "ja_JP",
+    type: "website",
+    images: [
+      {
+        url: "/ogp.png",
+        width: 1200,
+        height: 630,
+        alt: "Takahiro Fujii",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Takahiro Fujii",
+    description: "Product Engineer / Software Engineer / Designer / CTO / Takahiro Fujii / 藤井 貴浩",
+    creator: "@taka_ft",
+    images: ["/ogp.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-site-verification",
+  },
 };
 
 export default function RootLayout({
@@ -26,6 +77,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <JsonLd />
         <Header />
         {children}
       </body>
