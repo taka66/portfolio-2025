@@ -1,4 +1,4 @@
-import { HoverEffect } from "@/blocks/Card/CardHoverEffect/card-hover-effect";
+import { HoverEffect } from "@/blocks/Card/CardHoverEffect/CardHoverEffect";
 import { getDictionary } from "@/i18n/dictionaries";
 import { Locale } from "@/i18n/i18n-config";
 
