@@ -36,7 +36,7 @@ export const HoverEffect = ({
             <AnimatePresence>
               {hoveredIndex === idx && (
                 <motion.span
-                  className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block rounded-3xl"
+                  className="absolute inset-0 h-full w-full bg-neutral-400/70 dark:bg-slate-800/[0.8] block rounded-3xl"
                   layoutId="hoverBackground"
                   initial={{ opacity: 0 }}
                   animate={{
@@ -63,10 +63,10 @@ export const HoverEffect = ({
 
 export const Card = ({ className, children, image }: { className?: string; children: React.ReactNode; image?: string }) => {
   return (
-    <div className={cn("rounded-2xl h-full w-full overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20", className)}>
+    <div className={cn("rounded-2xl h-full w-full overflow-hidden bg-white dark:bg-black border border-neutral-200 dark:border-white/[0.2] group-hover:border-neutral-300 dark:group-hover:border-slate-700 relative z-20", className)}>
       {image && (
         <div className="absolute inset-0 w-full h-full z-10">
-          <Image src={image} alt="Project image" fill className="object-cover opacity-20" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+          <Image src={image} alt="Project image" fill className="object-cover opacity-[0.25] dark:opacity-20" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
         </div>
       )}
       <div className="relative z-50">
@@ -77,9 +77,9 @@ export const Card = ({ className, children, image }: { className?: string; child
 };
 
 export const CardTitle = ({ className, children }: { className?: string; children: React.ReactNode }) => {
-  return <h4 className={cn("text-zinc-100 font-bold tracking-wide mt-4", className)}>{children}</h4>;
+  return <h4 className={cn("text-neutral-900 dark:text-zinc-100 font-bold tracking-wide mt-4", className)}>{children}</h4>;
 };
 
 export const CardDescription = ({ className, children }: { className?: string; children: React.ReactNode }) => {
-  return <p className={cn("mt-8 text-zinc-400 tracking-wide leading-relaxed text-sm", className)}>{children}</p>;
+  return <p className={cn("mt-8 text-neutral-600 dark:text-zinc-400 tracking-wide leading-relaxed text-sm", className)}>{children}</p>;
 };
