@@ -62,11 +62,23 @@ export const HoverEffect = ({
 };
 
 export const Card = ({ className, children, image }: { className?: string; children: React.ReactNode; image?: string }) => {
+  const [isLoading, setLoading] = useState(true);
+
   return (
     <div className={cn("rounded-2xl h-full w-full overflow-hidden bg-white dark:bg-black border border-neutral-200 dark:border-white/[0.2] group-hover:border-neutral-300 dark:group-hover:border-slate-700 relative z-20", className)}>
       {image && (
         <div className="absolute inset-0 w-full h-full z-10">
-          <Image src={image} alt="Project image" fill className="object-cover opacity-[0.25] dark:opacity-20" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
+          <div className={cn("relative w-full h-full transition-all duration-500 ease-in-out", isLoading ? "scale-110 blur-xl" : "scale-100 blur-0")}>
+            <Image
+              src={image}
+              alt="Project image"
+              fill
+              className={cn("object-cover transition-opacity duration-500 ease-in-out", isLoading ? "opacity-0" : "opacity-[0.15] dark:opacity-20")}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onLoadingComplete={() => setLoading(false)}
+              priority
+            />
+          </div>
         </div>
       )}
       <div className="relative z-50">
