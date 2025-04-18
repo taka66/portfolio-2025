@@ -2,13 +2,19 @@
   "AboutMe": {
     "name": "Takahiro Fujii",
     "title": "Product Engineer / Software Engineer / Designer",
-    "description": "Leading product development as CTO at WealthPark Inc.\nAlso actively involved in product development and UI/UX design as an engineer utilizing LLMs.\n\nAfter graduating from university, joined Rakuten, Inc. and worked on the development of Rakuten Travel.\nIn the international business team, involved in the launch and development of multiple new services, including booking systems for overseas hotels, management screens, accounting systems, inbound sites, and external system integration.\nStarted career as a full-stack engineer. Since 2017, specialized in the UI/UX domain as an engineer and engineering manager, leading the management of web frontend and Android/iOS app development teams, and driving the growth of services and organizations.\n\nJoined WealthPark in 2020.\nAfter working as a frontend development lead, focused on building and strengthening a multinational engineering organization (product development, PdM, SRE, security, QA, PMO, etc.) as VPoE, while leading the development of multiple services in the real estate and FinTech domains.\nAppointed to the current position of CTO in 2024.\nAs CTO, also focusing on establishing budgets, mid-to-long-term development roadmaps, resource allocation, and evaluation systems.\n\nAs a freelancer and in private projects, involved in planning, design, and development, including product management and design.\nHobbies include basketball and cooking.\nFavorite things are coffee, alcoholic beverages, and Japanese cuisine in general."
+    "description": "Leading product development as CTO at WealthPark Inc.\nAlso actively involved in product development and UI/UX design as an engineer utilizing LLMs.\n\nAfter graduating from university, joined Rakuten, Inc. and worked on the development of Rakuten Travel.\nIn the international business team, involved in the launch and development of multiple new services, including booking systems for overseas hotels, management screens, accounting systems, inbound sites, and external system integration.\nStarted career as a full-stack engineer. Since 2017, specialized in the UI/UX domain as an engineer and engineering manager, leading the management of web frontend and Android/iOS app development teams, and driving the growth of services and organizations.\n\nJoined WealthPark in 2020.\nAfter working as a frontend development lead, focused on building and strengthening a multinational engineering organization (product development, PdM, SRE, security, QA, PMO, etc.) as VPoE, while leading the development of multiple services in the real estate and FinTech domains.\nAppointed to the current position of CTO in 2024.\nAs CTO, also focusing on establishing budgets, mid-to-long-term development roadmaps, resource allocation, and evaluation systems.\n\nAs a freelancer and in private projects, involved in planning, design, and development, including product management and design.\nHobbies include basketball and cooking and drawing.\nFavorite things are coffee, alcoholic beverages, and Japanese cuisine in general."
   },
   "WorksPage": {
     "projects": [
       {
+        "title": "WealthPark Co., Ltd.",
+        "description": "Developing and operating products for real estate management companies and property owners, as well as a digital platform for alternative investments. (2020-present)",
+        "link": "https://wealth-park.com/en/lp-product-us/",
+        "image": "/works/wealth-park.png"
+      },
+      {
         "title": "Koiki.fm",
-        "description": "Co-hosting a podcast for Engineering Managers (2020-2025)",
+        "description": "Co-hosting a podcast for Engineering Managers (2020-present)",
         "link": "https://creators.spotify.com/pod/profile/koikifm/",
         "image": "/works/koikifm.webp"
       },
@@ -68,6 +74,10 @@
         "image": "/works/wp-interview-3.webp"
       },
       {
+        "title": "Rakuten, Inc.",
+        "description": "Full-stack engineer and engineering manager at Rakuten Travel (2010-2019)"
+      },
+      {
         "title": "Large react product with 20+ FrontEnd Engineers in Rakuten Travel(React Tokyo Plus)",
         "description": "Presented at React Tokyo Plus, a React-related meetup (SpeakerDeck/2019)",
         "link": "https://speakerdeck.com/taka66/large-react-product-with-20-plus-frontend-engineers-in-rakuten-travel",
@@ -107,7 +117,7 @@
       },
       {
         "title": "KOIKI",
-        "description": "Founded engineering team for hackathon(2013-2016)",
+        "description": "Founded engineering team for hackathon(2013-2017)",
         "link": "https://koikijs.github.io/",
         "image": "/works/koiki.png"
       }
