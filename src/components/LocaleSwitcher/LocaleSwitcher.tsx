@@ -40,8 +40,9 @@ const LocaleSwitcher: React.FC = () => {
             key={locale}
             href={redirectedPathname(locale)}
             className={`
-              transition-colors
+              transition-colors px-3 py-2 rounded-md
               ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
+              active:bg-gray-100 dark:active:bg-gray-800 active:scale-95 transition-transform tap-highlight-transparent
             `}
           >
             {locale === "ja" ? "あ" : "A"}
