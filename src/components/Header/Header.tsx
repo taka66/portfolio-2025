@@ -56,6 +56,8 @@ const Header: React.FC = () => {
                     className={`
                       transition-colors flex items-center px-3 py-4
                       ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
+                      active:bg-gray-100 dark:active:bg-gray-800 active:scale-95 transition-transform
+                      rounded-md tap-highlight-transparent
                     `}
                   >
                     {item.label}
