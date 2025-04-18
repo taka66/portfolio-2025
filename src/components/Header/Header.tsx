@@ -41,7 +41,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto h-full flex justify-between items-center px-4">
         <LocaleSwitcher />
         <nav className="h-full">
-          <ul className="flex space-x-6 md:space-x-4 lg:space-x-6 h-full items-center">
+          <ul className="flex space-x-0 md:space-x-4 lg:space-x-6 h-full items-center">
             {navItems.map((item) => {
               const isExternal = item.href.startsWith("http");
               const localizedHref = isExternal ? item.href : getLocalizedHref(item.href);
