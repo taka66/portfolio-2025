@@ -40,21 +40,21 @@ const Header: React.FC = () => {
     <header className="fixed top-0 left-0 w-full h-16 bg-background/80 backdrop-blur-sm z-50">
       <div className="container mx-auto h-full flex justify-between items-center px-4">
         <LocaleSwitcher />
-        <nav>
-          <ul className="flex space-x-6">
+        <nav className="h-full">
+          <ul className="flex space-x-6 h-full items-center">
             {navItems.map((item) => {
               const isExternal = item.href.startsWith("http");
               const localizedHref = isExternal ? item.href : getLocalizedHref(item.href);
               const isActive = !isExternal && pathname === localizedHref;
 
               return (
-                <li key={item.label}>
+                <li key={item.label} className="h-full flex items-center">
                   <Link
                     href={localizedHref}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                     className={`
-                      transition-colors inline-flex items-center
+                      transition-colors flex items-center px-3 py-4
                       ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
                     `}
                   >
