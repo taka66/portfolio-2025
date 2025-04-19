@@ -32,7 +32,7 @@ const LocaleSwitcher: React.FC = () => {
   const currentLocale = i18n.locales.find((loc) => segments[1] === loc) || i18n.defaultLocale;
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex space-x-2 md:space-x-4">
       {i18n.locales.map((locale) => {
         const isActive = currentLocale === locale;
         return (
@@ -40,7 +40,7 @@ const LocaleSwitcher: React.FC = () => {
             key={locale}
             href={redirectedPathname(locale)}
             className={`
-              transition-colors px-3 py-2 rounded-md
+              transition-colors px-2 py-1 md:px-3 md:py-2 rounded-md text-sm md:text-base
               ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
               active:bg-gray-100 dark:active:bg-gray-800 active:scale-95 transition-transform tap-highlight-transparent
             `}

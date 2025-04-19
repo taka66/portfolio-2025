@@ -39,10 +39,10 @@ const Header: React.FC = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full h-16 bg-background/80 backdrop-blur-sm z-50">
-      <div className="container mx-auto h-full flex justify-between items-center px-4">
+      <div className="container mx-auto h-full flex justify-between items-center px-2 sm:px-4">
         <LocaleSwitcher />
         <nav className="h-full">
-          <ul className="flex space-x-0 md:space-x-4 lg:space-x-6 h-full items-center">
+          <ul className="flex space-x-1 sm:space-x-2 md:space-x-4 lg:space-x-6 h-full items-center">
             {navItems.map((item) => {
               const isExternal = item.href.startsWith("http");
               const localizedHref = isExternal ? item.href : getLocalizedHref(item.href);
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                     className={`
-                      transition-colors flex items-center px-3 py-4
+                      transition-colors flex items-center px-2 sm:px-3 py-4 text-sm sm:text-base
                       ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
                       active:bg-gray-100 dark:active:bg-gray-800 active:scale-95 transition-transform
                       rounded-md tap-highlight-transparent
