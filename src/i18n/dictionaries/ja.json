@@ -128,5 +128,56 @@
         "image": "/works/koiki.png"
       }
     ]
+  },
+  "DesignPage": {
+    "heading": "Design",
+    "subheading": "プライベートで制作したデザインやイラストの作品集です。",
+    "projects": [
+      {
+        "title": "自画像",
+        "description": "自画像イラスト。",
+        "image": "/design/fujii.webp"
+      },
+      {
+        "title": "あじさい",
+        "description": "あじさいととある街をモチーフにしたイラスト。",
+        "image": "/design/hydrangea.webp"
+      },
+      {
+        "title": "あじさい(縁)",
+        "description": "あじさいととある街をモチーフにしたイラスト。",
+        "image": "/design/hydrangea_border.webp"
+      },
+      {
+        "title": "タコスボーイ",
+        "description": "タコスを作るのが上手い人のイラスト。",
+        "image": "/design/dan.webp"
+      },
+      {
+        "title": "Boss",
+        "description": "お世話になった人のイラスト。",
+        "image": "/design/boss.webp"
+      },
+      {
+        "title": "富士山",
+        "description": "自分の名前にも入っているFujiのイラスト",
+        "image": "/design/fuji.webp"
+      },
+      {
+        "title": "小粋fmロゴ",
+        "description": "ポッドキャストのブランディングのために作成したロゴ",
+        "image": "/design/koikifm.webp"
+      },
+      {
+        "title": "エンジニア",
+        "description": "とあるエンジニアのイラスト。",
+        "image": "/design/engineer.webp"
+      },
+      {
+        "title": "Lady",
+        "description": "とある女性のイラスト。",
+        "image": "/design/lady.webp"
+      }
+    ]
   }
 }

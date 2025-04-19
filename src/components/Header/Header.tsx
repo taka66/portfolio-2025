@@ -14,6 +14,7 @@ interface NavItem {
 const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Works", href: "/works" },
+  { label: "Design", href: "/design" },
   { label: "Blog", href: "https://note.com/takahirofujii/" }, // 外部リンクの例
 ];
 

@@ -128,5 +128,56 @@
         "image": "/works/koiki.png"
       }
     ]
+  },
+  "DesignPage": {
+    "heading": "Design",
+    "subheading": "A collection of my design work and illustrations created in my free time.",
+    "projects": [
+      {
+        "title": "Self Portrait",
+        "description": "Self-portrait illustration.",
+        "image": "/design/fujii.webp"
+      },
+      {
+        "title": "Hydrangea",
+        "description": "Illustration featuring hydrangeas and a certain town.",
+        "image": "/design/hydrangea.webp"
+      },
+      {
+        "title": "Hydrangea (Border)",
+        "description": "Illustration featuring hydrangeas and a certain town.",
+        "image": "/design/hydrangea_border.webp"
+      },
+      {
+        "title": "Taco Boy",
+        "description": "Illustration of a person who is good at making tacos.",
+        "image": "/design/dan.webp"
+      },
+      {
+        "title": "Boss",
+        "description": "Illustration of a person I am indebted to.",
+        "image": "/design/boss.webp"
+      },
+      {
+        "title": "Mt. Fuji",
+        "description": "Illustration of Fuji, which is also part of my name.",
+        "image": "/design/fuji.webp"
+      },
+      {
+        "title": "Koiki.fm Logo",
+        "description": "Logo created for podcast branding.",
+        "image": "/design/koikifm.webp"
+      },
+      {
+        "title": "Engineer",
+        "description": "Illustration of a certain engineer.",
+        "image": "/design/engineer.webp"
+      },
+      {
+        "title": "Lady",
+        "description": "Illustration of a certain woman.",
+        "image": "/design/lady.webp"
+      }
+    ]
   }
 }
