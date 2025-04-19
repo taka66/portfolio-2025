@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/ogp.png",
+        url: `${process.env.NEXT_PUBLIC_SITE_URL}/ogp.png`,
         width: 1200,
         height: 630,
         alt: "Takahiro Fujii",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: "Takahiro Fujii",
     description: "Product Engineer / Software Engineer / Designer / CTO / Takahiro Fujii / 藤井 貴浩",
     creator: "@taka_ft",
-    images: ["/ogp.png"],
+    images: [`${process.env.NEXT_PUBLIC_SITE_URL}/ogp.png`],
   },
   robots: {
     index: true,
