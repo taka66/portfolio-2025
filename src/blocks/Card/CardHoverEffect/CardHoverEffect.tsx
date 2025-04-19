@@ -95,7 +95,7 @@ export const Card = ({ className, children, image, isSquare = false, isHovered =
               fill
               className={cn("transition-all duration-300 ease-in-out", isLoading ? "opacity-0" : isDesignMode && (isHovered || isMobile) ? "opacity-100" : "opacity-[0.15] dark:opacity-20", isSquare ? "object-contain" : "object-cover")}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              onLoadingComplete={() => setLoading(false)}
+              onLoad={() => setLoading(false)}
               priority
             />
           </div>
