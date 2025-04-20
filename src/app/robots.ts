@@ -1,8 +1,14 @@
-export default function robots() {
+import type { MetadataRoute } from "next";
+
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "facebookexternalhit",
+        allow: ["/"],
+      },
+      {
+        userAgent: "fmeta-externalagent",
         allow: ["/"],
       },
       {
@@ -16,4 +22,4 @@ export default function robots() {
     ],
     sitemap: "https://takahirofujii.dev/sitemap.xml",
   };
-} 
+}
