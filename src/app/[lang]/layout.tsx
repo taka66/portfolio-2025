@@ -76,8 +76,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const ogImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/ogp.png`;
   return (
     <html lang="ja">
+      <head>
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Takahiro Fujii" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ViewportHeightProvider>
           <JsonLd />
