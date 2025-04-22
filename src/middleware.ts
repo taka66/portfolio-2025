@@ -21,6 +21,10 @@ function getLocale(request: NextRequest): string | undefined {
 }
 
 export function middleware(request: NextRequest) {
+  const userAgent = request.headers.get("user-agent") || "";
+  if (userAgent.includes("facebookexternalhit") || userAgent.includes("fmeta-externalagent") || userAgent.includes("Twitterbot")) {
+    return NextResponse.next();
+  }
   const pathname = request.nextUrl.pathname;
 
   // Check if there is any supported locale in the pathname
