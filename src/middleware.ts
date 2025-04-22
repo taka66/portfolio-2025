@@ -9,22 +9,36 @@ import Negotiator from "negotiator";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 
 // Get best locale by using negotiator and intl-localematcher
-function getLocale(request: NextRequest): string | undefined {
-  const negotiatorHeaders: Record<string, string> = {};
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
+function getLocale(request: NextRequest): string {
+  try {
+    const negotiatorHeaders: Record<string, string> = {};
+    request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-  const locales = i18n.locales;
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
-  const locale = matchLocale(languages, locales, i18n.defaultLocale);
+    const locales = i18n.locales;
 
-  return locale;
+    // Accept-Languageヘッダーがあるか確認
+    const acceptLanguage = negotiatorHeaders["accept-language"];
+    if (!acceptLanguage || acceptLanguage === "*") {
+      // Accept-Languageヘッダーが無いか不適切な場合はデフォルトロケールを返す
+      return i18n.defaultLocale;
+    }
+
+    const languages = new Negotiator({ headers: negotiatorHeaders }).languages();
+
+    // negotiatorが有効な言語を返さない場合にエラーを避ける
+    if (!languages || languages.length === 0) {
+      return i18n.defaultLocale;
+    }
+
+    const locale = matchLocale(languages, locales, i18n.defaultLocale);
+    return locale;
+  } catch (error) {
+    console.error("Locale detection error:", error);
+    return i18n.defaultLocale;
+  }
 }
 
 export function middleware(request: NextRequest) {
-  const userAgent = request.headers.get("user-agent") || "";
-  if (userAgent.includes("facebookexternalhit") || userAgent.includes("fmeta-externalagent") || userAgent.includes("Twitterbot")) {
-    return NextResponse.next();
-  }
   const pathname = request.nextUrl.pathname;
 
   // Check if there is any supported locale in the pathname
