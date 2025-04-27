@@ -7,6 +7,16 @@ interface AboutMeProps {
     name: string;
     title: string;
     description: string;
+    skills?: {
+      tech: {
+        label: string;
+        items: string[];
+      };
+      management: {
+        label: string;
+        items: string[];
+      };
+    };
   };
 }
 
@@ -23,7 +33,7 @@ const LinkedInIcon = () => (
 );
 
 export function AboutMe({ dictionary }: AboutMeProps) {
-  const { name, title, description } = dictionary;
+  const { name, title, description, skills } = dictionary;
   return (
     <section id="about" className="py-16 md:py-24">
       <div className="container mx-auto px-4 md:px-6">
@@ -37,6 +47,26 @@ export function AboutMe({ dictionary }: AboutMeProps) {
           <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={5} blurStrength={6} textClassName="text-base text-gray-600 dark:text-gray-400 whitespace-pre-line">
             {description}
           </ScrollReveal>
+          {skills && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div>
+                <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">{skills.tech.label}</h4>
+                <ul className="list-disc list-inside space-y-1 text-base text-gray-600 dark:text-gray-400">
+                  {skills.tech.items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">{skills.management.label}</h4>
+                <ul className="list-disc list-inside space-y-1 text-base text-gray-600 dark:text-gray-400">
+                  {skills.management.items.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )}
           <div className="flex justify-center space-x-6 pt-4">
             <a href="https://x.com/taka_ft" target="_blank" rel="noopener noreferrer" aria-label="X profile" className="text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors">
               <XIcon />
