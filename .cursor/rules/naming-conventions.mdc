@@ -1,0 +1,26 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 命名規則ガイド
+
+## ディレクトリ・ファイル
+- ディレクトリ名は小文字・ダッシュ区切り（例: components/auth-wizard）
+- ファイル名も小文字・ダッシュ区切りを推奨
+
+## コンポーネント
+- 名前付きエクスポートを優先する
+- PascalCaseで命名（例: AuthWizard）
+
+## 変数・関数
+- キャメルケース（例: isLoading, fetchUserData）
+- 状態を表す変数には補助動詞を用いる（例: hasError, shouldFetch, canSubmit）
+
+## 型・インターフェース
+- インターフェース名はPascalCase、頭文字にIは付けない（例: UserProfile）
+- 型エイリアスもPascalCase
+
+## 定数・マップ
+- 定数は全て大文字・アンダースコア区切り（例: API_BASE_URL）
+- マップやリテラル型はcamelCaseまたはPascalCase

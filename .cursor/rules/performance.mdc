@@ -1,0 +1,23 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# パフォーマンス最適化ガイド
+
+## React/Next.js
+- React Server Components（RSC）を優先し、use clientは最小限に抑える
+- クライアントコンポーネントはSuspenseでラップし、フォールバックを設定する
+- 非重要なコンポーネントは動的import（dynamic）で遅延読み込み
+
+## 画像最適化
+- WebPフォーマットを優先し、Next.jsのImageコンポーネントを利用
+- width/heightを必ず指定し、レイジーローディングを有効化
+
+## Web Vitals
+- LCP、CLS、FIDを意識した設計・実装を行う
+- 不要な再レンダリングやレイアウトシフトを防ぐ
+
+## データフェッチ
+- サーバーコンポーネント/SSRでデータ取得を優先
+- クライアントでのデータ取得・状態管理は避ける

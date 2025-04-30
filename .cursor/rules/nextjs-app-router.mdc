@@ -1,0 +1,34 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Next.js App Router設計ガイド
+
+## ディレクトリ構成
+- `app/` 配下にページ・レイアウト・テンプレートを整理
+- ページは`page.tsx`、レイアウトは`layout.tsx`、サーバーアクションは`actions.ts`に分離
+
+## RSC/CSRの使い分け
+- データ取得・レンダリングはサーバーコンポーネント（RSC）を優先
+- Web APIアクセスやユーザーインタラクションのみクライアントコンポーネント（use client）
+- クライアント化が必要な場合は最小限の粒度で分割
+
+## ルーティング
+- 動的ルートは`[param]`、catch-allは`[...param]`で定義
+- レイアウトやテンプレートで共通UIを管理
+
+## サーバーアクション
+- サーバーアクションは`actions.ts`にまとめ、型安全に実装
+- バリデーション・エラーハンドリングを徹底
+
+## 例
+```tsx
+// app/user/[id]/page.tsx
+import { getUser } from './actions'
+
+export default async function UserPage({ params }: { params: { id: string } }) {
+  const user = await getUser(params.id)
+  return <div>{user.name}</div>
+}
+```
