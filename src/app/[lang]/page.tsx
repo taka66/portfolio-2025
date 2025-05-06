@@ -13,7 +13,7 @@ export default async function Home(props: { params: Promise<{ lang: Locale }> })
 
   return (
     <MotionWrapper className="font-[family-name:var(--font-geist-sans)]">
-      <main className="relative flex flex-col items-center" style={{ height: "calc(var(--vh, 1vh) * 100 - 4rem)" }}>
+      <main className="relative flex flex-col items-center" style={{ height: "calc(100dvh - 4rem)" }}>
         <div className="absolute inset-0 -z-10">
           <Threads amplitude={1} distance={0.1} enableMouseInteraction={true} />
         </div>
