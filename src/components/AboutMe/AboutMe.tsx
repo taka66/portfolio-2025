@@ -1,5 +1,4 @@
 import DecryptedText from "@/blocks/TextAnimations/DecryptedText/DecryptedText";
-import ScrollReveal from "@/blocks/TextAnimations/ScrollReveal/ScrollReveal";
 import React from "react";
 
 interface AboutMeProps {
@@ -44,9 +43,7 @@ export function AboutMe({ dictionary }: AboutMeProps) {
           <p className="text-base text-gray-600 dark:text-gray-400 font-medium">
             <DecryptedText speed={100} text={title} animateOn="view" revealDirection="center" />
           </p>
-          <ScrollReveal baseOpacity={0} enableBlur={true} baseRotation={5} blurStrength={6} textClassName="text-base text-gray-600 dark:text-gray-400 whitespace-pre-line">
-            {description}
-          </ScrollReveal>
+          <p className="text-base text-gray-600 dark:text-gray-400 whitespace-pre-line">{description}</p>
           {skills && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
               <div>
