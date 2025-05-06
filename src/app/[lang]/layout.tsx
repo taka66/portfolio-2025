@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header/Header";
 import JsonLd from "@/components/JsonLd";
-import { ViewportHeightProvider } from "@/components/ViewportHeightProvider/ViewportHeightProvider";
 import { AnimatePresence } from "framer-motion";
 
 const geistSans = Geist({
@@ -86,14 +85,12 @@ export default function RootLayout({
         <meta property="og:image:alt" content="Takahiro Fujii" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
-        <ViewportHeightProvider>
-          <JsonLd />
-          <Header />
-          <main className="flex-1">
-            <AnimatePresence mode="wait">{children}</AnimatePresence>
-          </main>
-          <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">© takahiro fujii</footer>
-        </ViewportHeightProvider>
+        <JsonLd />
+        <Header />
+        <main className="flex-1">
+          <AnimatePresence mode="wait">{children}</AnimatePresence>
+        </main>
+        <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">© takahiro fujii</footer>
       </body>
     </html>
   );
