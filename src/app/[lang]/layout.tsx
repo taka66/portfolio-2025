@@ -90,7 +90,7 @@ export default function RootLayout({
         <main className="flex-1">
           <AnimatePresence mode="wait">{children}</AnimatePresence>
         </main>
-        <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">© takahiro fujii</footer>
+        <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8">© takahiro fujii</footer>
       </body>
     </html>
   );
