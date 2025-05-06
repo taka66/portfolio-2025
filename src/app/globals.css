@@ -32,3 +32,8 @@ main,
 header {
   overflow-x: hidden;
 }
+
+html,
+body {
+  @apply overscroll-none;
+}
