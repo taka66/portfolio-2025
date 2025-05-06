@@ -14,9 +14,6 @@ export const ScrollIndicator = ({ text }: ScrollIndicatorProps) => {
         behavior: "smooth",
       });
     }
-    setTimeout(() => {
-      console.log("After scroll:", window.scrollY);
-    }, 500);
   };
 
   return (
