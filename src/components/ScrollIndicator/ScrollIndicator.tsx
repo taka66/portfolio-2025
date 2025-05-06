@@ -8,9 +8,12 @@ export const ScrollIndicator = ({ text }: ScrollIndicatorProps) => {
   const scrollToNextSection = () => {
     const viewportHeight = window.innerHeight;
     window.scrollTo({
-      top: viewportHeight,
+      top: viewportHeight + 1,
       behavior: "smooth",
     });
+    setTimeout(() => {
+      console.log("After scroll:", window.scrollY);
+    }, 500);
   };
 
   return (
