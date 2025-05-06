@@ -6,11 +6,14 @@ interface ScrollIndicatorProps {
 
 export const ScrollIndicator = ({ text }: ScrollIndicatorProps) => {
   const scrollToNextSection = () => {
-    // const viewportHeight = window.innerHeight;
-    // window.scrollTo({
-    //   top: viewportHeight + 1,
-    //   behavior: "smooth",
-    // });
+    // モバイル以外のみスクロールを有効化
+    if (window.innerWidth >= 768) {
+      const viewportHeight = window.innerHeight;
+      window.scrollTo({
+        top: viewportHeight + 1,
+        behavior: "smooth",
+      });
+    }
     setTimeout(() => {
       console.log("After scroll:", window.scrollY);
     }, 500);
