@@ -85,11 +85,13 @@ export default function RootLayout({
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Takahiro Fujii" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
         <ViewportHeightProvider>
           <JsonLd />
           <Header />
-          <AnimatePresence mode="wait">{children}</AnimatePresence>
+          <main className="flex-1">
+            <AnimatePresence mode="wait">{children}</AnimatePresence>
+          </main>
           <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-20">© takahiro fujii</footer>
         </ViewportHeightProvider>
       </body>
