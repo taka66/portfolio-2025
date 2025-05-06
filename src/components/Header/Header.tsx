@@ -38,7 +38,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full h-16 bg-background/80 backdrop-blur-sm z-50">
+    <header className="w-full h-16">
       <div className="max-w-5xl mx-auto px-2 md:px-8 h-full flex justify-between items-center">
         <LocaleSwitcher />
         <nav className="h-full">
