@@ -4,6 +4,7 @@ import "../globals.css";
 import Header from "@/components/Header/Header";
 import JsonLd from "@/components/JsonLd";
 import { AnimatePresence } from "framer-motion";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -91,6 +92,7 @@ export default function RootLayout({
           <AnimatePresence mode="wait">{children}</AnimatePresence>
         </main>
         <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8">© takahiro fujii</footer>
+        <Analytics />
       </body>
     </html>
   );
