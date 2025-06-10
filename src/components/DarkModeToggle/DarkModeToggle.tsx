@@ -9,7 +9,7 @@ const DarkModeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleDarkMode}
-      className="relative inline-flex items-center justify-center w-12 h-6 bg-gray-200 dark:bg-gray-600 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+      className="hidden md:inline-flex relative items-center justify-center w-12 h-6 bg-gray-200 dark:bg-gray-600 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
       aria-label={isDarkMode ? "ライトモードに切り替え" : "ダークモードに切り替え"}
     >
       <span
