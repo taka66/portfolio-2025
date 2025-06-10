@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import LocaleSwitcher from "@/components/LocaleSwitcher/LocaleSwitcher";
+import DarkModeToggle from "@/components/DarkModeToggle/DarkModeToggle";
 import { i18n } from "@/i18n/i18n-config";
 
 interface NavItem {
@@ -40,7 +41,10 @@ const Header: React.FC = () => {
   return (
     <header className="w-full h-16">
       <div className="max-w-5xl mx-auto px-2 md:px-8 h-full flex justify-between items-center">
-        <LocaleSwitcher />
+        <div className="flex items-center space-x-4">
+          <LocaleSwitcher />
+          <DarkModeToggle />
+        </div>
         <nav className="h-full">
           <ul className="flex space-x-0 md:space-x-4 lg:space-x-6 h-full items-center">
             {navItems.map((item) => {
