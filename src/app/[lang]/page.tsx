@@ -39,8 +39,7 @@ export default function Home(props: { params: Promise<{ lang: Locale }> }) {
   useEffect(() => {
     const calculateHeight = () => {
       const windowHeight = window.innerHeight;
-      const headerHeight = 64; // 4rem = 64px
-      setHeroHeight(`${windowHeight - headerHeight}px`);
+      setHeroHeight(`${windowHeight}px`);
     };
 
     calculateHeight();
@@ -61,7 +60,7 @@ export default function Home(props: { params: Promise<{ lang: Locale }> }) {
 
   return (
     <MotionWrapper className="font-[family-name:var(--font-geist-sans)]">
-      <main className="relative flex flex-col items-center" style={{ height: heroHeight || "calc(100vh - 4rem)" }}>
+      <main className="relative flex flex-col items-center -mt-16" style={{ height: heroHeight || "100vh" }}>
         <div className="absolute inset-0 -z-10">
           <Threads amplitude={1} distance={0.1} enableMouseInteraction={true} />
         </div>
