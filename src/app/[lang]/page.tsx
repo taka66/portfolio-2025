@@ -1,3 +1,5 @@
+"use client";
+
 import { AnimatedContent } from "@/components/AnimatedContent/AnimatedContent";
 import Threads from "@/blocks/Backgrounds/Threads/Threads";
 import { AboutMe } from "@/components/AboutMe/AboutMe";
@@ -5,15 +7,61 @@ import { Locale } from "@/i18n/i18n-config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { ScrollIndicator } from "@/components/ScrollIndicator/ScrollIndicator";
 import { MotionWrapper } from "@/components/MotionWrapper/MotionWrapper";
+import { useEffect, useState } from "react";
 
-export default async function Home(props: { params: Promise<{ lang: Locale }> }) {
-  const { lang } = await props.params;
-  const dictData = await getDictionary(lang);
-  const aboutme = dictData.AboutMe;
+export default function Home(props: { params: Promise<{ lang: Locale }> }) {
+  const [heroHeight, setHeroHeight] = useState<string | undefined>(undefined);
+  const [aboutmeDict, setAboutmeDict] = useState<{
+    name: string;
+    title: string;
+    description: string;
+    skills?: {
+      tech: {
+        label: string;
+        items: string[];
+      };
+      management: {
+        label: string;
+        items: string[];
+      };
+    };
+  } | null>(null);
+
+  useEffect(() => {
+    const loadDictionary = async () => {
+      const { lang } = await props.params;
+      const dictData = await getDictionary(lang);
+      setAboutmeDict(dictData.AboutMe);
+    };
+    loadDictionary();
+  }, [props.params]);
+
+  useEffect(() => {
+    const calculateHeight = () => {
+      const windowHeight = window.innerHeight;
+      const headerHeight = 64; // 4rem = 64px
+      setHeroHeight(`${windowHeight - headerHeight}px`);
+    };
+
+    calculateHeight();
+
+    const handleResize = () => {
+      if (!heroHeight) {
+        calculateHeight();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [heroHeight]);
+
+  if (!aboutmeDict) {
+    return null;
+  }
 
   return (
     <MotionWrapper className="font-[family-name:var(--font-geist-sans)]">
-      <main className="relative flex flex-col items-center" style={{ height: "calc(100dvh - 4rem)" }}>
+      <main className="relative flex flex-col items-center" style={{ height: heroHeight || "calc(100vh - 4rem)" }}>
         <div className="absolute inset-0 -z-10">
           <Threads amplitude={1} distance={0.1} enableMouseInteraction={true} />
         </div>
@@ -26,7 +74,7 @@ export default async function Home(props: { params: Promise<{ lang: Locale }> })
           <ScrollIndicator text="About me" />
         </div>
       </main>
-      <AboutMe dictionary={aboutme} />
+      <AboutMe dictionary={aboutmeDict} />
     </MotionWrapper>
   );
 }
