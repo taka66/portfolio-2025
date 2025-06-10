@@ -14,7 +14,8 @@
       "Bash(git push:*)",
       "Bash(gh repo view:*)",
       "mcp__playwright__browser_resize",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "mcp__playwright__browser_take_screenshot"
     ],
     "deny": []
   }
