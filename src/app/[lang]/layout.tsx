@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header/Header";
 import JsonLd from "@/components/JsonLd";
+import ThemeScript from "@/components/ThemeScript";
 import { AnimatePresence } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -78,12 +79,13 @@ export default function RootLayout({
 }>) {
   const ogImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/ogp.png`;
   return (
-    <html lang="ja">
+    <html lang="ja" suppressHydrationWarning>
       <head>
         <meta property="og:image" content={ogImageUrl} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Takahiro Fujii" />
+        <ThemeScript />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
         <JsonLd />
