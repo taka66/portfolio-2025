@@ -157,7 +157,7 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
         iResolution: {
           value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height),
         },
-        uColor: { value: new Color(...(isDarkMode ? color : [0.1, 0.1, 0.1])) },
+        uColor: { value: new Color(...(isDarkMode ? color : [0.4, 0.4, 0.4])) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
@@ -228,7 +228,7 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
   // Update color when dark mode changes
   useEffect(() => {
     if (programRef.current) {
-      programRef.current.uniforms.uColor.value = new Color(...(isDarkMode ? color : [0.1, 0.1, 0.1]));
+      programRef.current.uniforms.uColor.value = new Color(...(isDarkMode ? color : [0.4, 0.4, 0.4]));
     }
   }, [isDarkMode, color]);
 
