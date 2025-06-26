@@ -1,10 +1,37 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDarkMode } from "@/hooks/useDarkMode";
 
 const DarkModeToggle: React.FC = () => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent hydration mismatch by not rendering dynamic content until mounted
+  if (!mounted) {
+    return (
+      <button
+        className="hidden md:inline-flex relative items-center justify-center w-12 h-6 bg-gray-200 dark:bg-gray-600 rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+        aria-label="ダークモードに切り替え"
+        disabled
+      >
+        <span className="absolute w-5 h-5 bg-white dark:bg-gray-800 rounded-full transition-transform duration-200 flex items-center justify-center -translate-x-3">
+          <svg
+            className="w-3 h-3 text-gray-600"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+          </svg>
+        </span>
+      </button>
+    );
+  }
 
   return (
     <button

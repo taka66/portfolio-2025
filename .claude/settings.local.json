@@ -6,7 +6,16 @@
       "Bash(npm test)",
       "Bash(npm run lint)",
       "mcp__playwright__browser_close",
-      "Bash(npm test:*)"
+      "Bash(npm test:*)",
+      "Bash(curl:*)",
+      "mcp__playwright__browser_snapshot",
+      "Bash(lsof:*)",
+      "Bash(ps:*)",
+      "Bash(npm run dev:*)",
+      "Bash(pkill:*)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_console_messages",
+      "Bash(git add:*)"
     ],
     "deny": []
   }
