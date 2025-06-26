@@ -43,7 +43,7 @@ const Header: React.FC = () => {
       <div className="max-w-5xl mx-auto px-2 md:px-8 h-full flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <LocaleSwitcher />
-          {/* <DarkModeToggle /> */}
+          <DarkModeToggle />
         </div>
         <nav className="h-full">
           <ul className="flex space-x-0 md:space-x-4 lg:space-x-6 h-full items-center">

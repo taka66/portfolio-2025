@@ -10,21 +10,34 @@ export const useDarkMode = () => {
     // Check for stored preference first
     const stored = localStorage.getItem("darkMode");
     if (stored !== null) {
-      setIsDarkMode(stored === "true");
+      const isDark = stored === "true";
+      setIsDarkMode(isDark);
       setIsManual(true);
-      document.documentElement.classList.toggle("dark", stored === "true");
+      if (isDark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
       return;
     }
 
     // Fall back to system preference
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     setIsDarkMode(mediaQuery.matches);
-    document.documentElement.classList.toggle("dark", mediaQuery.matches);
+    if (mediaQuery.matches) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
 
     const handler = (e: MediaQueryListEvent) => {
       if (!isManual) {
         setIsDarkMode(e.matches);
-        document.documentElement.classList.toggle("dark", e.matches);
+        if (e.matches) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
       }
     };
 
@@ -37,7 +50,11 @@ export const useDarkMode = () => {
     setIsDarkMode(newMode);
     setIsManual(true);
     localStorage.setItem("darkMode", String(newMode));
-    document.documentElement.classList.toggle("dark", newMode);
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   const resetToSystem = () => {
@@ -45,7 +62,11 @@ export const useDarkMode = () => {
     setIsManual(false);
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     setIsDarkMode(mediaQuery.matches);
-    document.documentElement.classList.toggle("dark", mediaQuery.matches);
+    if (mediaQuery.matches) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   return { isDarkMode, toggleDarkMode, resetToSystem, isManual };
