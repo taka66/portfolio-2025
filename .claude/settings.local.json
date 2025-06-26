@@ -1,21 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run build:*)",
-      "mcp__playwright__browser_navigate",
-      "Bash(npm run dev:*)",
-      "mcp__playwright__browser_wait_for",
-      "Bash(pkill:*)",
-      "Bash(true)",
-      "mcp__playwright__browser_click",
-      "mcp__playwright__browser_console_messages",
-      "Bash(git checkout:*)",
-      "Bash(git add:*)",
-      "Bash(git push:*)",
-      "Bash(gh repo view:*)",
-      "mcp__playwright__browser_resize",
-      "Bash(git commit:*)",
-      "mcp__playwright__browser_take_screenshot"
+      "Bash(npm install:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm test)",
+      "Bash(npm run lint)"
     ],
     "deny": []
   }
