@@ -191,6 +191,11 @@
         "title": "Lady",
         "description": "とある女性のイラスト。",
         "image": "/design/lady.webp"
+      },
+      {
+        "title": "映画監督",
+        "description": "とある映画監督のイラスト。",
+        "image": "/design/movie_director.webp"
       }
     ]
   }

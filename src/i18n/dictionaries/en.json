@@ -191,6 +191,11 @@
         "title": "Lady",
         "description": "Illustration of a certain woman.",
         "image": "/design/lady.webp"
+      },
+      {
+        "title": "Movie Director",
+        "description": "Illustration of a movie director.",
+        "image": "/design/movie_director.webp"
       }
     ]
   }
