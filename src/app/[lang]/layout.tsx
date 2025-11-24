@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header/Header";
 import JsonLd from "@/components/JsonLd";
-import ThemeScript from "@/components/ThemeScript";
+
 import { AnimatePresence } from "framer-motion";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -72,12 +72,15 @@ export const metadata: Metadata = {
   },
 };
 
+import { Providers } from "@/components/Providers";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const ogImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/ogp.png`;
+
   return (
     <html lang="ja" suppressHydrationWarning>
       <head>
@@ -85,16 +88,17 @@ export default function RootLayout({
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="Takahiro Fujii" />
-        <ThemeScript />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
-        <JsonLd />
-        <Header />
-        <main className="flex-1">
-          <AnimatePresence mode="wait">{children}</AnimatePresence>
-        </main>
-        <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-12">© takahiro fujii</footer>
-        <Analytics />
+        <Providers>
+          <JsonLd />
+          <Header />
+          <main className="flex-1">
+            <AnimatePresence mode="wait">{children}</AnimatePresence>
+          </main>
+          <footer className="flex gap-[24px] flex-wrap items-center justify-center p-8 pb-12">© takahiro fujii</footer>
+          <Analytics />
+        </Providers>
       </body>
     </html>
   );
