@@ -10,6 +10,12 @@ import { match as matchLocale } from "@formatjs/intl-localematcher";
 
 // Get best locale by using negotiator and intl-localematcher
 function getLocale(request: NextRequest): string {
+  // Check for cookie first
+  const cookieLocale = request.cookies.get("NEXT_LOCALE")?.value;
+  if (cookieLocale && i18n.locales.includes(cookieLocale as (typeof i18n.locales)[number])) {
+    return cookieLocale;
+  }
+
   try {
     const negotiatorHeaders: Record<string, string> = {};
     request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));

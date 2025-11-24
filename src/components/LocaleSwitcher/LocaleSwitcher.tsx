@@ -39,6 +39,9 @@ const LocaleSwitcher: React.FC = () => {
           <Link
             key={locale}
             href={redirectedPathname(locale)}
+            onClick={() => {
+              document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
+            }}
             className={`
               transition-colors px-2 py-1 md:px-3 md:py-2 rounded-md text-sm md:text-base
               ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
