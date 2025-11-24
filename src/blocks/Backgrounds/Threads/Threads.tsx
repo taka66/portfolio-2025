@@ -134,7 +134,7 @@ void main() {
 const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseInteraction = false, className, ...rest }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameId = useRef<number>();
-  const isDarkMode = useDarkMode();
+  const { isDarkMode } = useDarkMode();
   const programRef = useRef<Program | null>(null);
 
   useEffect(() => {
@@ -145,7 +145,7 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
@@ -170,6 +170,7 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
     function resize() {
       const { clientWidth, clientHeight } = container;
       renderer.setSize(clientWidth, clientHeight);
+      renderer.dpr = window.devicePixelRatio;
       program.uniforms.iResolution.value.r = clientWidth;
       program.uniforms.iResolution.value.g = clientHeight;
       program.uniforms.iResolution.value.b = clientWidth / clientHeight;
