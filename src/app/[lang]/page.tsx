@@ -10,7 +10,6 @@ import { MotionWrapper } from "@/components/MotionWrapper/MotionWrapper";
 import { useEffect, useState } from "react";
 
 export default function Home(props: { params: Promise<{ lang: Locale }> }) {
-  const [heroHeight, setHeroHeight] = useState<string | undefined>(undefined);
   const [aboutmeDict, setAboutmeDict] = useState<{
     name: string;
     title: string;
@@ -36,23 +35,6 @@ export default function Home(props: { params: Promise<{ lang: Locale }> }) {
     loadDictionary();
   }, [props.params]);
 
-  useEffect(() => {
-    const calculateHeight = () => {
-      const windowHeight = window.innerHeight;
-      setHeroHeight(`${windowHeight}px`);
-    };
-
-    calculateHeight();
-
-    const handleResize = () => {
-      if (!heroHeight) {
-        calculateHeight();
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [heroHeight]);
 
   if (!aboutmeDict) {
     return null;
@@ -60,7 +42,7 @@ export default function Home(props: { params: Promise<{ lang: Locale }> }) {
 
   return (
     <MotionWrapper className="font-[family-name:var(--font-geist-sans)]">
-      <main className="relative flex flex-col items-center -mt-16" style={{ height: heroHeight || "100vh" }}>
+      <main className="relative flex flex-col items-center -mt-16 h-[100svh]">
         <div className="absolute inset-0 -z-10">
           <Threads amplitude={1} distance={0.1} enableMouseInteraction={true} />
         </div>

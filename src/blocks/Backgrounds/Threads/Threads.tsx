@@ -146,6 +146,7 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+    gl.canvas.style.display = "block";
     container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
@@ -165,18 +166,21 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
     });
 
     programRef.current = program;
+    renderer.dpr = window.devicePixelRatio;
     const mesh = new Mesh(gl, { geometry, program });
 
-    function resize() {
-      const { clientWidth, clientHeight } = container;
-      renderer.setSize(clientWidth, clientHeight);
-      renderer.dpr = window.devicePixelRatio;
-      program.uniforms.iResolution.value.r = clientWidth;
-      program.uniforms.iResolution.value.g = clientHeight;
-      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
+    function resize(width: number, height: number) {
+      renderer.setSize(width, height);
+      program.uniforms.iResolution.value.r = gl.drawingBufferWidth;
+      program.uniforms.iResolution.value.g = gl.drawingBufferHeight;
+      program.uniforms.iResolution.value.b = gl.drawingBufferWidth / gl.drawingBufferHeight;
     }
-    window.addEventListener("resize", resize);
-    resize();
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (!entries.length) return;
+      const { width, height } = entries[0].contentRect;
+      resize(width, height);
+    });
+    resizeObserver.observe(container);
 
     const currentMouse = [0.5, 0.5];
     let targetMouse = [0.5, 0.5];
@@ -215,7 +219,7 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
 
     return () => {
       if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
-      window.removeEventListener("resize", resize);
+      resizeObserver.disconnect();
 
       if (enableMouseInteraction) {
         container.removeEventListener("mousemove", handleMouseMove);
