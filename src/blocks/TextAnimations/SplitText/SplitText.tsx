@@ -1,8 +1,8 @@
 /*
-	Installed from https://reactbits.dev/ts/tailwind/
+	Refactored to use framer-motion
 */
 "use client";
-import { useSprings, animated, SpringConfig } from "@react-spring/web";
+import { motion, Variants } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 interface SplitTextProps {
@@ -11,11 +11,11 @@ interface SplitTextProps {
   delay?: number;
   animationFrom?: { opacity: number; transform: string };
   animationTo?: { opacity: number; transform: string };
-  easing?: SpringConfig["easing"];
   threshold?: number;
   rootMargin?: string;
   textAlign?: "left" | "right" | "center" | "justify" | "start" | "end";
   onLetterAnimationComplete?: () => void;
+  easing?: (t: number) => number; // Kept for compatibility but not used directly in framer-motion variants in this simple implementation
 }
 
 const SplitText: React.FC<SplitTextProps> = ({
@@ -24,17 +24,14 @@ const SplitText: React.FC<SplitTextProps> = ({
   delay = 100,
   animationFrom = { opacity: 0, transform: "translate3d(0,40px,0)" },
   animationTo = { opacity: 1, transform: "translate3d(0,0,0)" },
-  easing = (t: number) => t,
   threshold = 0.1,
   rootMargin = "-100px",
   textAlign = "center",
   onLetterAnimationComplete,
 }) => {
   const words = text.split(" ").map((word) => word.split(""));
-  const letters = words.flat();
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
-  const animatedCount = useRef(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -56,42 +53,66 @@ const SplitText: React.FC<SplitTextProps> = ({
     return () => observer.disconnect();
   }, [threshold, rootMargin]);
 
-  const springs = useSprings(
-    letters.length,
-    letters.map((_, i) => ({
-      from: animationFrom,
-      to: inView
-        ? // eslint-disable-next-line
-          async (next: (props: any) => Promise<void>) => {
-            await next(animationTo);
-            animatedCount.current += 1;
-            if (animatedCount.current === letters.length && onLetterAnimationComplete) {
-              onLetterAnimationComplete();
-            }
-          }
-        : animationFrom,
-      delay: i * delay,
-      config: { easing },
-    }))
-  );
+  // Convert transform string to object for framer-motion if possible, or use style
+  // For simplicity, we'll assume the transform string is compatible or we map it.
+  // However, framer-motion prefers x/y/z.
+  // Let's parse the simple translate3d(0,40px,0) case or just use the string in style.
+  // Framer motion 'animate' prop handles style objects.
+
+  const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: delay / 1000, // delay is in ms
+      },
+    },
+  };
+
+  const letterVariants: Variants = {
+    hidden: { 
+        opacity: animationFrom.opacity,
+        transform: animationFrom.transform 
+    },
+    visible: { 
+        opacity: animationTo.opacity, 
+        transform: animationTo.transform,
+        transition: {
+            duration: 0.5,
+            ease: "easeOut"
+        }
+    },
+  };
 
   return (
-    <p ref={ref} className={`split-parent overflow-hidden inline ${className}`} style={{ textAlign, whiteSpace: "normal", wordWrap: "break-word" }}>
+    <motion.p
+      ref={ref}
+      className={`split-parent overflow-hidden inline ${className}`}
+      style={{ textAlign, whiteSpace: "normal", wordWrap: "break-word" }}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      variants={containerVariants}
+      onAnimationComplete={() => {
+          if (onLetterAnimationComplete) onLetterAnimationComplete();
+      }}
+    >
       {words.map((word, wordIndex) => (
         <span key={wordIndex} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
           {word.map((letter, letterIndex) => {
             const index = words.slice(0, wordIndex).reduce((acc, w) => acc + w.length, 0) + letterIndex;
-
             return (
-              <animated.span key={index} style={springs[index] as unknown as React.CSSProperties} className="inline-block transform transition-opacity will-change-transform">
+              <motion.span
+                key={index}
+                variants={letterVariants}
+                className="inline-block will-change-transform"
+              >
                 {letter}
-              </animated.span>
+              </motion.span>
             );
           })}
           <span style={{ display: "inline-block", width: "0.3em" }}>&nbsp;</span>
         </span>
       ))}
-    </p>
+    </motion.p>
   );
 };
 
