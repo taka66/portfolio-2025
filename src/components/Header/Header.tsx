@@ -39,7 +39,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="w-full h-16">
+    <header className="relative z-10 w-full h-16">
       <div className="max-w-5xl mx-auto px-2 md:px-8 h-full flex justify-between items-center">
         <div className="flex items-center space-x-4">
           <LocaleSwitcher />
