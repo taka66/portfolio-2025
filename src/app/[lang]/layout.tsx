@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { i18n, type Locale } from "@/i18n/i18n-config";
 import "../globals.css";
 import Header from "@/components/Header/Header";
 import JsonLd from "@/components/JsonLd";
@@ -17,7 +18,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
+export function generateStaticParams() {
+  return i18n.locales.map((lang) => ({ lang }));
+}
+
+export async function generateMetadata(props: { params: Promise<{ lang: Locale }> }): Promise<Metadata> {
+  const { lang } = await props.params;
+  return {
+    ...baseMetadata,
+    openGraph: {
+      ...baseMetadata.openGraph,
+      locale: lang === "ja" ? "ja_JP" : "en_US",
+      alternateLocale: lang === "ja" ? "en_US" : "ja_JP",
+    },
+  };
+}
+
+const baseMetadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
     default: "Takahiro Fujii",
@@ -74,15 +91,18 @@ export const metadata: Metadata = {
 
 import { Providers } from "@/components/Providers";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: Locale }>;
 }>) {
+  const { lang } = await params;
   const ogImageUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/ogp.png`;
 
   return (
-    <html lang="ja" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <meta property="og:image" content={ogImageUrl} />
         <meta property="og:image:width" content="1200" />

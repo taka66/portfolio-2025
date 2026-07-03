@@ -18,6 +18,18 @@ interface DesignPageProps {
   }>;
 }
 
+export async function generateMetadata(props: DesignPageProps) {
+  const { lang } = await props.params;
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.DesignPage.heading,
+    alternates: {
+      canonical: lang === "ja" ? "/design" : `/${lang}/design`,
+      languages: { ja: "/design", en: "/en/design" },
+    },
+  };
+}
+
 export default async function Design(props: DesignPageProps) {
   const params = await props.params;
   const dict = await getDictionary(params.lang);

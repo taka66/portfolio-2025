@@ -17,6 +17,18 @@ interface WorksPageProps {
   }>;
 }
 
+export async function generateMetadata(props: WorksPageProps) {
+  const { lang } = await props.params;
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.WorksPage.heading,
+    alternates: {
+      canonical: lang === "ja" ? "/works" : `/${lang}/works`,
+      languages: { ja: "/works", en: "/en/works" },
+    },
+  };
+}
+
 export default async function Works(props: WorksPageProps) {
   const params = await props.params;
   const dict = await getDictionary(params.lang);

@@ -47,6 +47,14 @@ function getLocale(request: NextRequest): string {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
+  // The default locale is served without a prefix (e.g. "/works"), so a
+  // prefixed URL like "/ja/works" would be duplicate content. Redirect it
+  // to the canonical unprefixed URL.
+  if (pathname === `/${i18n.defaultLocale}` || pathname.startsWith(`/${i18n.defaultLocale}/`)) {
+    const canonicalPathname = pathname.slice(i18n.defaultLocale.length + 1) || "/";
+    return NextResponse.redirect(new URL(canonicalPathname, request.url), 308);
+  }
+
   // Check if there is any supported locale in the pathname
   const pathnameIsMissingLocale = i18n.locales.every((locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`);
 
