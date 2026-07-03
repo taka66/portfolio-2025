@@ -4,3 +4,13 @@ claude
 .next
 .env
 .mcp
+docs/
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+.playwright-mcp/
+
+# typescript
+tsconfig.tsbuildinfo
