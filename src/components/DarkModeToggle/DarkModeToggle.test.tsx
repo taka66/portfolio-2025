@@ -6,12 +6,21 @@ import { useDarkMode } from '@/hooks/useDarkMode'
 // Mock the useDarkMode hook
 vi.mock('@/hooks/useDarkMode')
 
+const mockUseDarkMode = (overrides: Partial<ReturnType<typeof useDarkMode>> = {}) => {
+  const value = {
+    isDarkMode: false,
+    toggleDarkMode: vi.fn(),
+    resetToSystem: vi.fn(),
+    isManual: false,
+    ...overrides,
+  }
+  vi.mocked(useDarkMode).mockReturnValue(value)
+  return value
+}
+
 describe('DarkModeToggle', () => {
   it('renders correctly in light mode', () => {
-    vi.mocked(useDarkMode).mockReturnValue({
-      isDarkMode: false,
-      toggleDarkMode: vi.fn(),
-    })
+    mockUseDarkMode({ isDarkMode: false })
 
     render(<DarkModeToggle />)
 
@@ -20,10 +29,7 @@ describe('DarkModeToggle', () => {
   })
 
   it('renders correctly in dark mode', () => {
-    vi.mocked(useDarkMode).mockReturnValue({
-      isDarkMode: true,
-      toggleDarkMode: vi.fn(),
-    })
+    mockUseDarkMode({ isDarkMode: true })
 
     render(<DarkModeToggle />)
 
@@ -32,11 +38,7 @@ describe('DarkModeToggle', () => {
   })
 
   it('calls toggleDarkMode when clicked', async () => {
-    const toggleDarkMode = vi.fn()
-    vi.mocked(useDarkMode).mockReturnValue({
-      isDarkMode: false,
-      toggleDarkMode,
-    })
+    const { toggleDarkMode } = mockUseDarkMode({ isDarkMode: false })
 
     const { user } = setup(<DarkModeToggle />)
 
@@ -47,10 +49,7 @@ describe('DarkModeToggle', () => {
   })
 
   it('has correct toggle position in light mode', () => {
-    vi.mocked(useDarkMode).mockReturnValue({
-      isDarkMode: false,
-      toggleDarkMode: vi.fn(),
-    })
+    mockUseDarkMode({ isDarkMode: false })
 
     render(<DarkModeToggle />)
 
@@ -59,10 +58,7 @@ describe('DarkModeToggle', () => {
   })
 
   it('has correct toggle position in dark mode', () => {
-    vi.mocked(useDarkMode).mockReturnValue({
-      isDarkMode: true,
-      toggleDarkMode: vi.fn(),
-    })
+    mockUseDarkMode({ isDarkMode: true })
 
     render(<DarkModeToggle />)
 
@@ -71,10 +67,7 @@ describe('DarkModeToggle', () => {
   })
 
   it('displays moon icon in light mode', () => {
-    vi.mocked(useDarkMode).mockReturnValue({
-      isDarkMode: false,
-      toggleDarkMode: vi.fn(),
-    })
+    mockUseDarkMode({ isDarkMode: false })
 
     render(<DarkModeToggle />)
 
@@ -84,10 +77,7 @@ describe('DarkModeToggle', () => {
   })
 
   it('displays sun icon in dark mode', () => {
-    vi.mocked(useDarkMode).mockReturnValue({
-      isDarkMode: true,
-      toggleDarkMode: vi.fn(),
-    })
+    mockUseDarkMode({ isDarkMode: true })
 
     render(<DarkModeToggle />)
 
