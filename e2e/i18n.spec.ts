@@ -29,6 +29,19 @@ test.describe("default locale (Japanese browser)", () => {
   });
 });
 
+test("top page is server-rendered with hreflang and canonical tags", async ({ request }) => {
+  // The page used to render nothing until the dictionary loaded client-side;
+  // the About section must now be part of the initial HTML.
+  const response = await request.get("/en");
+  const html = await response.text();
+
+  expect(html).toContain('id="about"');
+  expect(html).toContain('rel="canonical"');
+  // Next serializes the attribute as hrefLang (camelCase); browsers don't care
+  expect(html).toMatch(/hreflang="ja"/i);
+  expect(html).toMatch(/hreflang="en"/i);
+});
+
 test("sitemap lists both locales with hreflang alternates", async ({ request }) => {
   const response = await request.get("/sitemap.xml");
   expect(response.ok()).toBe(true);

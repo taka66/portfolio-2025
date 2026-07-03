@@ -1,5 +1,3 @@
-"use client";
-
 import { AnimatedContent } from "@/components/AnimatedContent/AnimatedContent";
 import Threads from "@/blocks/Backgrounds/Threads/Threads";
 import { AboutMe } from "@/components/AboutMe/AboutMe";
@@ -7,38 +5,24 @@ import { Locale } from "@/i18n/i18n-config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { ScrollIndicator } from "@/components/ScrollIndicator/ScrollIndicator";
 import { MotionWrapper } from "@/components/MotionWrapper/MotionWrapper";
-import { useEffect, useState } from "react";
 
-export default function Home(props: { params: Promise<{ lang: Locale }> }) {
-  const [aboutmeDict, setAboutmeDict] = useState<{
-    name: string;
-    title: string;
-    description: string;
-    skills?: {
-      tech: {
-        label: string;
-        items: string[];
-      };
-      management: {
-        label: string;
-        items: string[];
-      };
-    };
-  } | null>(null);
+interface HomePageProps {
+  params: Promise<{ lang: Locale }>;
+}
 
-  useEffect(() => {
-    const loadDictionary = async () => {
-      const { lang } = await props.params;
-      const dictData = await getDictionary(lang);
-      setAboutmeDict(dictData.AboutMe);
-    };
-    loadDictionary();
-  }, [props.params]);
+export async function generateMetadata(props: HomePageProps) {
+  const { lang } = await props.params;
+  return {
+    alternates: {
+      canonical: lang === "ja" ? "/" : `/${lang}`,
+      languages: { ja: "/", en: "/en" },
+    },
+  };
+}
 
-
-  if (!aboutmeDict) {
-    return null;
-  }
+export default async function Home(props: HomePageProps) {
+  const { lang } = await props.params;
+  const dict = await getDictionary(lang);
 
   return (
     <MotionWrapper className="font-[family-name:var(--font-geist-sans)]">
@@ -55,7 +39,7 @@ export default function Home(props: { params: Promise<{ lang: Locale }> }) {
           <ScrollIndicator text="About me" />
         </div>
       </main>
-      <AboutMe dictionary={aboutmeDict} />
+      <AboutMe dictionary={dict.AboutMe} />
     </MotionWrapper>
   );
 }

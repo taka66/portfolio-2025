@@ -1,7 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
 
-// The top page loads its dictionary client-side and renders nothing until
-// it arrives, so wait for the About section before interacting.
 async function gotoTopPage(page: Page) {
   await page.goto("/en");
   await expect(page.locator("#about")).toBeAttached();
