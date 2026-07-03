@@ -66,6 +66,21 @@ test.describe("top page (desktop)", () => {
     expect(errors).toEqual([]);
   });
 
+  test("theme toggle keeps the WebGL canvas alive", async ({ page }) => {
+    // Regression test: toggling the theme used to tear down and recreate the
+    // whole WebGL context; it must only update the shader color uniform.
+    await gotoTopPage(page);
+    await expect(page.locator("main canvas")).toHaveCount(1);
+    await page.evaluate(() => {
+      document.querySelector("main canvas")?.setAttribute("data-original", "true");
+    });
+
+    await page.locator('header button[aria-label*="モード"]').click();
+    await page.waitForTimeout(300);
+
+    await expect(page.locator('main canvas[data-original="true"]')).toHaveCount(1);
+  });
+
   test("no horizontal overflow", async ({ page }) => {
     await gotoTopPage(page);
 

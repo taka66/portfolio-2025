@@ -136,6 +136,10 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
   const animationFrameId = useRef<number>();
   const { isDarkMode } = useDarkMode();
   const programRef = useRef<Program | null>(null);
+  // Latest resolved color, readable from the main effect without listing
+  // theme/color in its deps — those changes only need a uniform update,
+  // not a full WebGL context re-creation.
+  const uColorRef = useRef<[number, number, number]>(isDarkMode ? color : [0.4, 0.4, 0.4]);
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -158,7 +162,7 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
         iResolution: {
           value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height),
         },
-        uColor: { value: new Color(...(isDarkMode ? color : [0.4, 0.4, 0.4])) },
+        uColor: { value: new Color(...uColorRef.current) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
@@ -199,7 +203,16 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
       container.addEventListener("mouseleave", handleMouseLeave);
     }
 
+    // Pause rendering while the hero is off-screen or the tab is hidden, and
+    // accumulate elapsed time across pauses so resuming doesn't jump.
+    let elapsed = 0;
+    let previousTimestamp: number | null = null;
+    let inViewport = true;
+
     function update(t: number) {
+      if (previousTimestamp !== null) elapsed += t - previousTimestamp;
+      previousTimestamp = t;
+
       if (enableMouseInteraction) {
         const smoothing = 0.05;
         currentMouse[0] += smoothing * (targetMouse[0] - currentMouse[0]);
@@ -210,15 +223,42 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
         program.uniforms.uMouse.value[0] = 0.5;
         program.uniforms.uMouse.value[1] = 0.5;
       }
-      program.uniforms.iTime.value = t * 0.001;
+      program.uniforms.iTime.value = elapsed * 0.001;
 
       renderer.render({ scene: mesh });
       animationFrameId.current = requestAnimationFrame(update);
     }
-    animationFrameId.current = requestAnimationFrame(update);
+
+    function stopLoop() {
+      if (animationFrameId.current !== undefined) {
+        cancelAnimationFrame(animationFrameId.current);
+        animationFrameId.current = undefined;
+      }
+      previousTimestamp = null;
+    }
+
+    function syncLoop() {
+      if (inViewport && !document.hidden) {
+        if (animationFrameId.current === undefined) {
+          animationFrameId.current = requestAnimationFrame(update);
+        }
+      } else {
+        stopLoop();
+      }
+    }
+
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      inViewport = entries[0]?.isIntersecting ?? true;
+      syncLoop();
+    });
+    intersectionObserver.observe(container);
+    document.addEventListener("visibilitychange", syncLoop);
+    syncLoop();
 
     return () => {
-      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
+      stopLoop();
+      intersectionObserver.disconnect();
+      document.removeEventListener("visibilitychange", syncLoop);
       resizeObserver.disconnect();
 
       if (enableMouseInteraction) {
@@ -228,12 +268,13 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, [color, amplitude, distance, enableMouseInteraction, isDarkMode]);
+  }, [amplitude, distance, enableMouseInteraction]);
 
-  // Update color when dark mode changes
+  // Update color when dark mode changes (uniform only, no context re-creation)
   useEffect(() => {
+    uColorRef.current = isDarkMode ? color : [0.4, 0.4, 0.4];
     if (programRef.current) {
-      programRef.current.uniforms.uColor.value = new Color(...(isDarkMode ? color : [0.4, 0.4, 0.4]));
+      programRef.current.uniforms.uColor.value = new Color(...uColorRef.current);
     }
   }, [isDarkMode, color]);
 
