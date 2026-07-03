@@ -46,14 +46,18 @@ html.dark {
   color-scheme: dark;
 }
 
+/* Use clip instead of hidden: hidden turns these elements into scroll
+   containers, which (combined with overscroll-none) swallows wheel events
+   and breaks page scrolling on desktop. clip only clips, no scroll container. */
 html,
 body,
 main,
 header {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-html,
-body {
+/* overscroll-behavior must only be set on the root element; setting it on
+   body blocks scroll chaining from body to the viewport. */
+html {
   @apply overscroll-none;
 }
