@@ -5,7 +5,7 @@ import "../globals.css";
 import Header from "@/components/Header/Header";
 import JsonLd from "@/components/JsonLd";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
