@@ -29,6 +29,29 @@ test.describe("default locale (Japanese browser)", () => {
   });
 });
 
+test("locale switcher works from an English browser on the top page", async ({ page }) => {
+  // Regression test: the ja link used to be a <Link>, whose prefetch of "/"
+  // ran before the NEXT_LOCALE cookie existed and cached the "/ -> /en"
+  // redirect; clicking あ then replayed the cached redirect and the switch
+  // silently failed for every visitor with a non-Japanese Accept-Language.
+  await page.goto("/en");
+  await expect(page.locator("#about")).toBeAttached();
+  await page.waitForTimeout(1500); // give any prefetch time to be cached
+
+  await page.locator('header a[hreflang="ja"]').click();
+  await page.waitForLoadState();
+
+  await expect(page).toHaveURL("/");
+  await expect(page.locator("html")).toHaveAttribute("lang", "ja");
+
+  // Switching back to English still works
+  await page.locator('header a[hreflang="en"]').click();
+  await page.waitForLoadState();
+
+  await expect(page).toHaveURL("/en");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+});
+
 test("top page is server-rendered with hreflang and canonical tags", async ({ request }) => {
   // The page used to render nothing until the dictionary loaded client-side;
   // the About section must now be part of the initial HTML.

@@ -61,14 +61,16 @@ export function middleware(request: NextRequest) {
   // Redirect if there is no locale
   if (pathnameIsMissingLocale) {
     const locale = getLocale(request);
+    // "/" must map to "/en", not "/en/"
+    const localizedPathname = pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
 
     // If locale is the default locale, don't redirect
     if (locale === i18n.defaultLocale) {
-      return NextResponse.rewrite(new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, request.url));
+      return NextResponse.rewrite(new URL(localizedPathname, request.url));
     }
 
     // For non-default locales, redirect with the locale prefix
-    return NextResponse.redirect(new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, request.url));
+    return NextResponse.redirect(new URL(localizedPathname, request.url));
   }
 }
 

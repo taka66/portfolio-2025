@@ -1,7 +1,6 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Link from "next/link";
 import { i18n, type Locale } from "@/i18n/i18n-config";
 
 const LocaleSwitcher: React.FC = () => {
@@ -18,13 +17,13 @@ const LocaleSwitcher: React.FC = () => {
     }
 
     // For default locale (ja), don't add locale to the path
-    if (locale === i18n.defaultLocale) {
-      return segments.join("/") || "/";
+    if (locale !== i18n.defaultLocale) {
+      segments.splice(1, 0, locale);
     }
 
-    // For other locales, add the locale to the path
-    segments.splice(1, 0, locale);
-    return segments.join("/");
+    const path = segments.join("/") || "/";
+    // "/" + "en" + "" joins to "/en/" — strip the trailing slash
+    return path !== "/" && path.endsWith("/") ? path.slice(0, -1) : path;
   };
 
   // Get current locale from pathname or use default
@@ -36,7 +35,11 @@ const LocaleSwitcher: React.FC = () => {
       {i18n.locales.map((locale) => {
         const isActive = currentLocale === locale;
         return (
-          <Link
+          // Deliberately a plain <a>, not <Link>: switching locale must be a
+          // full page load. <Link> prefetches the target URL before the
+          // NEXT_LOCALE cookie is written, and the router then replays the
+          // cached (old-locale) redirect on click, so the switch never happens.
+          <a
             key={locale}
             href={redirectedPathname(locale)}
             lang={locale}
@@ -53,7 +56,7 @@ const LocaleSwitcher: React.FC = () => {
             `}
           >
             {locale === "ja" ? "あ" : "A"}
-          </Link>
+          </a>
         );
       })}
     </div>
