@@ -173,11 +173,19 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
     renderer.dpr = window.devicePixelRatio;
     const mesh = new Mesh(gl, { geometry, program });
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function renderStaticFrame() {
+      program.uniforms.iTime.value = 0;
+      renderer.render({ scene: mesh });
+    }
+
     function resize(width: number, height: number) {
       renderer.setSize(width, height);
       program.uniforms.iResolution.value.r = gl.drawingBufferWidth;
       program.uniforms.iResolution.value.g = gl.drawingBufferHeight;
       program.uniforms.iResolution.value.b = gl.drawingBufferWidth / gl.drawingBufferHeight;
+      if (prefersReducedMotion) renderStaticFrame();
     }
     const resizeObserver = new ResizeObserver((entries) => {
       if (!entries.length) return;
@@ -238,6 +246,8 @@ const Threads: React.FC<ThreadsProps> = ({ color = [1, 1, 1], amplitude = 1, dis
     }
 
     function syncLoop() {
+      // Reduced motion: the background stays as a single static frame
+      if (prefersReducedMotion) return;
       if (inViewport && !document.hidden) {
         if (animationFrameId.current === undefined) {
           animationFrameId.current = requestAnimationFrame(update);

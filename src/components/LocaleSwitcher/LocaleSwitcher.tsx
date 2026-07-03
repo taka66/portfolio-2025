@@ -39,6 +39,10 @@ const LocaleSwitcher: React.FC = () => {
           <Link
             key={locale}
             href={redirectedPathname(locale)}
+            lang={locale}
+            hrefLang={locale}
+            aria-label={locale === "ja" ? "日本語に切り替え" : "Switch to English"}
+            aria-current={isActive ? "true" : undefined}
             onClick={() => {
               document.cookie = `NEXT_LOCALE=${locale}; path=/; max-age=31536000; SameSite=Lax`;
             }}

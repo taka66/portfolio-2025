@@ -66,6 +66,27 @@ test.describe("top page (desktop)", () => {
     expect(errors).toEqual([]);
   });
 
+  test("scroll indicator is a button and scrolls to the About section", async ({ page }) => {
+    await gotoTopPage(page);
+
+    // force: the button bounces forever (animate-bounce), so Playwright's
+    // stability check would never settle
+    await page.getByRole("button", { name: "About me" }).click({ force: true });
+
+    await expect
+      .poll(() => page.evaluate(() => window.scrollY))
+      .toBeGreaterThan(300);
+  });
+
+  test("active nav link is marked with aria-current", async ({ page }) => {
+    await gotoTopPage(page);
+    await expect(page.locator('header a[aria-current="page"]')).toHaveText("Home");
+
+    await page.locator("header a", { hasText: "Works" }).click();
+    await expect(page).toHaveURL(/\/en\/works$/);
+    await expect(page.locator('header a[aria-current="page"]')).toHaveText("Works");
+  });
+
   test("theme toggle keeps the WebGL canvas alive", async ({ page }) => {
     // Regression test: toggling the theme used to tear down and recreate the
     // whole WebGL context; it must only update the shader color uniform.

@@ -35,7 +35,8 @@ const Header: React.FC = () => {
   const getLocalizedHref = (href: string) => {
     if (href.startsWith("http")) return href;
     if (currentLocale === i18n.defaultLocale) return href;
-    return `/${currentLocale}${href.startsWith("/") ? "" : "/"}${href}`;
+    // "/" must become "/en", not "/en/", so isActive can match the pathname
+    return `/${currentLocale}${href === "/" ? "" : href}`;
   };
 
   // relative z-10: the hero <main> is pulled up behind the header with -mt-16,
@@ -60,6 +61,7 @@ const Header: React.FC = () => {
                     href={localizedHref}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
+                    aria-current={isActive ? "page" : undefined}
                     className={`
                       transition-colors flex items-center px-3 py-4
                       ${isActive ? "text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white"}
