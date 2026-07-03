@@ -10,6 +10,10 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
+  // Single worker on CI: the WebGL hero renders through SwiftShader there and
+  // parallel pages starve the 2-core runner, stalling client-side navigation.
+  workers: process.env.CI ? 1 : undefined,
+  expect: { timeout: 10_000 },
   reporter: process.env.CI ? [["github"], ["html", { open: "never" }]] : "list",
   use: {
     baseURL: `http://localhost:${PORT}`,
