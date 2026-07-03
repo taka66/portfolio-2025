@@ -1,30 +1,34 @@
 /*
 	Installed from https://reactbits.dev/ts/tailwind/
+	Rewritten from @react-spring/web to motion to consolidate animation libraries.
 */
 "use client";
-import { useSprings, animated, SpringConfig } from "@react-spring/web";
-import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useReducedMotion } from "motion/react";
+import { useRef } from "react";
 
 interface SplitTextProps {
   text?: string;
   className?: string;
+  /** Per-letter stagger in milliseconds */
   delay?: number;
-  animationFrom?: { opacity: number; transform: string };
-  animationTo?: { opacity: number; transform: string };
-  easing?: SpringConfig["easing"];
+  /** Duration of each letter's animation in seconds */
+  duration?: number;
+  easing?: (t: number) => number;
   threshold?: number;
   rootMargin?: string;
   textAlign?: "left" | "right" | "center" | "justify" | "start" | "end";
   onLetterAnimationComplete?: () => void;
 }
 
+// Matches the previous easeOutCubic default
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
 const SplitText: React.FC<SplitTextProps> = ({
   text = "",
   className = "",
   delay = 100,
-  animationFrom = { opacity: 0, transform: "translate3d(0,40px,0)" },
-  animationTo = { opacity: 1, transform: "translate3d(0,0,0)" },
-  easing = (t: number) => t,
+  duration = 0.6,
+  easing = easeOutCubic,
   threshold = 0.1,
   rootMargin = "-100px",
   textAlign = "center",
@@ -32,48 +36,28 @@ const SplitText: React.FC<SplitTextProps> = ({
 }) => {
   const words = text.split(" ").map((word) => word.split(""));
   const letters = words.flat();
-  const [inView, setInView] = useState(false);
-  const ref = useRef<HTMLParagraphElement>(null);
   const animatedCount = useRef(0);
+  const shouldReduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          if (ref.current) {
-            observer.unobserve(ref.current);
-          }
-        }
-      },
-      { threshold, rootMargin }
-    );
+  // Observe the paragraph, not the letters: the paragraph clips its content
+  // (overflow-hidden mask effect), so the translated-down letters start
+  // outside its box and would never intersect the viewport themselves.
+  const ref = useRef<HTMLParagraphElement>(null);
+  const isInView = useInView(ref, {
+    once: true,
+    amount: threshold,
+    margin: rootMargin as `${number}px`,
+  });
 
-    if (ref.current) {
-      observer.observe(ref.current);
+  const revealed = isInView || !!shouldReduceMotion;
+
+  const handleLetterComplete = () => {
+    if (!revealed) return;
+    animatedCount.current += 1;
+    if (animatedCount.current === letters.length && onLetterAnimationComplete) {
+      onLetterAnimationComplete();
     }
-
-    return () => observer.disconnect();
-  }, [threshold, rootMargin]);
-
-  const springs = useSprings(
-    letters.length,
-    letters.map((_, i) => ({
-      from: animationFrom,
-      to: inView
-        ? // eslint-disable-next-line
-          async (next: (props: any) => Promise<void>) => {
-            await next(animationTo);
-            animatedCount.current += 1;
-            if (animatedCount.current === letters.length && onLetterAnimationComplete) {
-              onLetterAnimationComplete();
-            }
-          }
-        : animationFrom,
-      delay: i * delay,
-      config: { easing },
-    }))
-  );
+  };
 
   return (
     <p ref={ref} className={`split-parent overflow-hidden inline ${className}`} style={{ textAlign, whiteSpace: "normal", wordWrap: "break-word" }}>
@@ -83,9 +67,16 @@ const SplitText: React.FC<SplitTextProps> = ({
             const index = words.slice(0, wordIndex).reduce((acc, w) => acc + w.length, 0) + letterIndex;
 
             return (
-              <animated.span key={index} style={springs[index] as unknown as React.CSSProperties} className="inline-block transform transition-opacity will-change-transform">
+              <motion.span
+                key={index}
+                className="inline-block transform transition-opacity will-change-transform"
+                initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                transition={{ duration, delay: (index * delay) / 1000, ease: easing }}
+                onAnimationComplete={handleLetterComplete}
+              >
                 {letter}
-              </animated.span>
+              </motion.span>
             );
           })}
           <span style={{ display: "inline-block", width: "0.3em" }}>&nbsp;</span>

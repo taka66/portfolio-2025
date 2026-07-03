@@ -1,15 +1,14 @@
 /*
 	Installed from https://reactbits.dev/ts/tailwind/
+	Rewritten from gsap/ScrollTrigger to motion's scroll-linked values to
+	consolidate animation libraries (and to stop the old cleanup from killing
+	every ScrollTrigger on the page).
 */
 "use client";
-import React, { useEffect, useRef, useMemo, ReactNode, RefObject, ElementType } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useRef, useMemo, ReactNode, RefObject } from "react";
+import { motion, useScroll, useTransform, useMotionTemplate, MotionValue } from "motion/react";
 
 interface ScrollRevealProps {
-  as?: ElementType;
   children: ReactNode;
   scrollContainerRef?: RefObject<HTMLElement>;
   enableBlur?: boolean;
@@ -18,113 +17,99 @@ interface ScrollRevealProps {
   blurStrength?: number;
   containerClassName?: string;
   textClassName?: string;
-  rotationEnd?: string;
-  wordAnimationEnd?: string;
 }
 
-const ScrollReveal: React.FC<ScrollRevealProps> = ({ as: Component = "div", children, scrollContainerRef, enableBlur = true, baseOpacity = 0.1, baseRotation = 3, blurStrength = 4, containerClassName = "", textClassName = "", rotationEnd = "bottom bottom", wordAnimationEnd = "bottom bottom" }) => {
-  const containerRef = useRef<HTMLElement>(null);
+interface WordProps {
+  children: ReactNode;
+  progress: MotionValue<number>;
+  range: [number, number];
+  baseOpacity: number;
+  enableBlur: boolean;
+  blurStrength: number;
+}
 
-  const splitText = useMemo(() => {
+const Word: React.FC<WordProps> = ({ children, progress, range, baseOpacity, enableBlur, blurStrength }) => {
+  const opacity = useTransform(progress, range, [baseOpacity, 1]);
+  const blur = useTransform(progress, range, [blurStrength, 0]);
+  const filter = useMotionTemplate`blur(${blur}px)`;
+
+  return (
+    <motion.span className="inline-block word" style={{ opacity, ...(enableBlur ? { filter } : {}), willChange: "opacity" }}>
+      {children}
+    </motion.span>
+  );
+};
+
+const ScrollReveal: React.FC<ScrollRevealProps> = ({
+  children,
+  scrollContainerRef,
+  enableBlur = true,
+  baseOpacity = 0.1,
+  baseRotation = 3,
+  blurStrength = 4,
+  containerClassName = "",
+  textClassName = "",
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Rotation eases out while the element travels from the viewport bottom
+  // to fully scrolled in (was: ScrollTrigger "top bottom" -> "bottom bottom")
+  const { scrollYProgress: rotationProgress } = useScroll({
+    target: containerRef,
+    container: scrollContainerRef,
+    offset: ["start end", "end end"],
+  });
+  const rotate = useTransform(rotationProgress, [0, 1], [baseRotation, 0]);
+
+  // Words fade/sharpen in sequence, starting once the element passes 80% of
+  // the viewport height (was: "top bottom-=20%" -> "bottom bottom")
+  const { scrollYProgress: wordsProgress } = useScroll({
+    target: containerRef,
+    container: scrollContainerRef,
+    offset: ["start 0.8", "end end"],
+  });
+
+  const { nodes, wordCount } = useMemo(() => {
     const text = typeof children === "string" ? children : "";
     // Split by newline first, keeping the newline characters
     const lines = text.split(/(\n)/);
 
-    return lines.map((line, lineIndex) => {
+    let count = 0;
+    const parts = lines.map((line, lineIndex) => {
       if (line === "\n") {
-        // Render a <br> tag for explicit newlines
-        return <br key={`br-${lineIndex}`} />;
+        return { type: "br" as const, key: `br-${lineIndex}` };
       }
-      // For non-newline parts, split by other whitespace and wrap words
       return line.split(/(\s+)/).map((part, partIndex) => {
-        // Preserve existing whitespace handling (might collapse visually)
-        if (part.match(/^\s+$/)) {
-          // Return non-newline whitespace as is (browser might collapse it)
-          // We return it to maintain spacing logic if needed, though \n is handled above.
-          return part;
-        }
-        if (part.length > 0) {
-          // Wrap actual words in spans for animation
-          return (
-            <span className="inline-block word" key={`${lineIndex}-${partIndex}`}>
-              {part}
-            </span>
-          );
-        }
-        return null; // Handle potential empty strings from splitting
+        if (part.match(/^\s+$/)) return { type: "space" as const, text: part, key: `${lineIndex}-${partIndex}` };
+        if (part.length > 0) return { type: "word" as const, text: part, index: count++, key: `${lineIndex}-${partIndex}` };
+        return null;
       });
     });
+    return { nodes: parts.flat(), wordCount: count };
   }, [children]);
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
-
-    gsap.fromTo(
-      el,
-      { transformOrigin: "0% 50%", rotate: baseRotation },
-      {
-        ease: "none",
-        rotate: 0,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: "top bottom",
-          end: rotationEnd,
-          scrub: true,
-        },
-      }
-    );
-
-    const wordElements = el.querySelectorAll<HTMLElement>(".word");
-
-    gsap.fromTo(
-      wordElements,
-      { opacity: baseOpacity, willChange: "opacity" },
-      {
-        ease: "none",
-        opacity: 1,
-        stagger: 0.05,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: "top bottom-=20%",
-          end: wordAnimationEnd,
-          scrub: true,
-        },
-      }
-    );
-
-    if (enableBlur) {
-      gsap.fromTo(
-        wordElements,
-        { filter: `blur(${blurStrength}px)` },
-        {
-          ease: "none",
-          filter: "blur(0px)",
-          stagger: 0.05,
-          scrollTrigger: {
-            trigger: el,
-            scroller,
-            start: "top bottom-=20%",
-            end: wordAnimationEnd,
-            scrub: true,
-          },
-        }
-      );
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [scrollContainerRef, enableBlur, baseRotation, baseOpacity, rotationEnd, wordAnimationEnd, blurStrength]);
-
   return (
-    <Component ref={containerRef} className={`my-5 ${containerClassName}`}>
-      <p className={`leading-[1.5]  ${textClassName}`}>{splitText}</p>
-    </Component>
+    <motion.div ref={containerRef} className={`my-5 ${containerClassName}`} style={{ rotate, transformOrigin: "0% 50%" }}>
+      <p className={`leading-[1.5]  ${textClassName}`}>
+        {nodes.map((node) => {
+          if (!node) return null;
+          if (node.type === "br") return <br key={node.key} />;
+          if (node.type === "space") return node.text;
+          return (
+            <Word
+              key={node.key}
+              progress={wordsProgress}
+              range={[node.index / wordCount, (node.index + 1) / wordCount]}
+              baseOpacity={baseOpacity}
+              enableBlur={enableBlur}
+              blurStrength={blurStrength}
+            >
+              {node.text}
+            </Word>
+          );
+        })}
+      </p>
+    </motion.div>
   );
 };
 

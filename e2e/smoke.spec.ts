@@ -66,6 +66,25 @@ test.describe("top page (desktop)", () => {
     expect(errors).toEqual([]);
   });
 
+  test("hero title letters animate in to full visibility", async ({ page }) => {
+    // Regression test: the letters start clipped under the paragraph's
+    // overflow mask; a broken in-view trigger leaves the title invisible.
+    await gotoTopPage(page);
+
+    await expect
+      .poll(
+        () =>
+          page.evaluate(() => {
+            const letters = [...document.querySelectorAll(".split-parent span")].filter(
+              (s) => s.textContent?.length === 1 && s.textContent !== " "
+            );
+            return letters.length > 0 && letters.every((s) => parseFloat(getComputedStyle(s).opacity) > 0.9);
+          }),
+        { timeout: 20_000 }
+      )
+      .toBe(true);
+  });
+
   test("scroll indicator is a button and scrolls to the About section", async ({ page }) => {
     await gotoTopPage(page);
 
